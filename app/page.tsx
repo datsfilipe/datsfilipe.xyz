@@ -16,7 +16,7 @@ export default function Page() {
         Currently, I work at D3, and together we are creating the next generation of Web3 domains.`}
       </p>
       <p className="mb-4 text-justify">
-        {`I'm proficient with the majority of the mostly used web development tools from the Javascript/Typescript ecosystem,
+        {`I'm proficient with the mostly used web development frameworks and tools from the Javascript/Typescript ecosystem,
         and also have experience working with integration of web3 functionality into traditional applications.`}
       </p>
       <div className="my-8">
