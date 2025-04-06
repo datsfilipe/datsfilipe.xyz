@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
+import { useWindowSize } from 'app/hooks/useWindowSize';
 import { cx } from '../utils'
 
 const projectItems = {
@@ -100,15 +101,19 @@ export default function Page() {
   const [hoveredProject, setHoveredProject] = useState<keyof typeof projectItems | null>(null);
   const [isIframeVisible, setIsIframeVisible] = useState(false);
 
-  const handleCardClick = (projectName: keyof typeof projectItems) => {
-    if (projectItems[projectName].link.startsWith('https://github')) {
-      window.open(projectItems[projectName].link, '_blank');
-      return; // don'show the iframe for github links
-    }
+  const { width } = useWindowSize();
 
-    setHoveredProject(projectName);
-    setIsIframeVisible(true);
-  };
+  const handleCardClick = useCallback(
+    (projectName: keyof typeof projectItems) => {
+      if (projectItems[projectName].link.startsWith('https://github') || (width && width < 768)) {
+        window.open(projectItems[projectName].link, '_blank');
+        return; // don'show the iframe for github links
+      }
+
+      setHoveredProject(projectName);
+      setIsIframeVisible(true);
+    }, [width]
+  );
 
   const handleClose = () => {
     setIsIframeVisible(false);
@@ -117,7 +122,7 @@ export default function Page() {
   return (
     <section className="relative">
       <h1 className="font-semibold text-2xl mb-8 tracking-tighter">My projects</h1>
-      <div className="gap-4 grid grid-cols-[1fr_1fr]">
+      <div className="gap-4 grid grid-cols-1 sm:grid-cols-[1fr_1fr]">
         {Object.entries(projectItems).map(([name, { description, link }]) => {
           const hasPreview = !link.startsWith('https://github')
 
@@ -125,12 +130,12 @@ export default function Page() {
             <div
               key={name}
               className={cx(
-                "relative w-[300px] h-[200px] p-5 border border-neutral-100 dark:border-neutral-900",
+                "relative w-full sm:w-[300px] h-[200px] p-5 border border-neutral-100 dark:border-neutral-900",
                 "rounded-xl flex flex-col cursor-pointer transition-all hover:bg-neutral-900"
               )}
               onClick={() => handleCardClick(name as keyof typeof projectItems)}
             >
-              {hasPreview && (
+              {hasPreview && (width && width > 768) && (
                 <div className="absolute top-2 right-2 bg-neutral-300 dark:bg-neutral-800 text-black dark:text-white text-xs font-semibold px-2 py-1 rounded">
                   Preview
                 </div>
