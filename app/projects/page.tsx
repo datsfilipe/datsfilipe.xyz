@@ -127,7 +127,7 @@ export default function Page() {
               onClick={() => handleCardClick(name as keyof typeof projectItems)}
             >
               {hasPreview && (
-                <div className="absolute top-2 right-2 bg-neutral-800 text-white text-xs font-semibold px-2 py-1 rounded">
+                <div className="absolute top-2 right-2 bg-neutral-300 dark:bg-neutral-800 text-black dark:text-white text-xs font-semibold px-2 py-1 rounded">
                   Preview
                 </div>
               )}
