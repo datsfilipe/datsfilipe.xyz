@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation';
+import { cx } from '../utils'
 
 const navItems = {
   '/': {
@@ -33,8 +34,10 @@ export function Navbar() {
                 <Link
                   key={path}
                   href={path}
-                  className={`transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle relative py-1 px-2 m-1 overflow-hidden ${selected ? "w-6" : "w-auto"
-                    }`}
+                  className={cx(
+                    "transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle",
+                    `relative py-1 px-2 m-1 overflow-hidden ${selected ? "w-6" : "w-auto"}`
+                  )}
                 >
                   <span
                     className={`transform transition-all duration-300 ${selected ? "opacity-0 scale-0" : "opacity-100 scale-100"
@@ -43,8 +46,10 @@ export function Navbar() {
                     {name}
                   </span>
                   <span
-                    className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform transition-all duration-300 ${selected ? "opacity-100 scale-100" : "opacity-0 scale-0"
-                      }`}
+                    className={cx(
+                      "absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform",
+                      `transition-all duration-300 ${selected ? "opacity-100 scale-100" : "opacity-0 scale-0"}`
+                    )}
                   >
                     &#x2022;
                   </span>

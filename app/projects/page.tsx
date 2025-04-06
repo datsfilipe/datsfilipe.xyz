@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react';
+import { cx } from '../utils'
 
 const projectItems = {
   'Bad Apple': {
@@ -123,7 +124,10 @@ export default function Page() {
           return (
             <div
               key={name}
-              className="relative w-[300px] h-[200px] p-5 border border-neutral-100 dark:border-neutral-900 rounded-xl flex flex-col cursor-pointer transition-all hover:bg-neutral-900"
+              className={cx(
+                "relative w-[300px] h-[200px] p-5 border border-neutral-100 dark:border-neutral-900",
+                "rounded-xl flex flex-col cursor-pointer transition-all hover:bg-neutral-900"
+              )}
               onClick={() => handleCardClick(name as keyof typeof projectItems)}
             >
               {hasPreview && (
@@ -147,9 +151,22 @@ export default function Page() {
               <h3 className="font-semibold text-neutral-400">{hoveredProject} Preview</h3>
               <button
                 onClick={handleClose}
-                className="p-1 rounded-full transition-all cursor-pointer hover:text-neutral-800 text-neutral-600 hover:dark:text-neutral-200 dark:text-neutral-400"
+                className={cx(
+                  "p-1 rounded-full transition-all cursor-pointer hover:text-neutral-800 text-neutral-600",
+                  "hover:dark:text-neutral-200 dark:text-neutral-400"
+                )}
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
                   <line x1="18" y1="6" x2="6" y2="18"></line>
                   <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
