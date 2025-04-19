@@ -35,9 +35,9 @@ const projectItems = {
     description: 'Sudoku game made with React',
     year: '2023'
   },
-  'Safe Cats': {
-    link: 'https://safe-cats.vercel.app/',
-    description: 'Cats give their opinion on technical, subjects (use 666 as password)',
+  'Hot Take Cats': {
+    link: 'https://hot-take-cats.vercel.app/',
+    description: 'Cats give their opinion on technical, subjects',
     year: '2023'
   },
   'My Rices': {
