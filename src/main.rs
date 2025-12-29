@@ -1,3 +1,4 @@
+use datsfilipe_xyz::ThreadPool;
 use std::{
     fs,
     io::{BufReader, prelude::*},
@@ -6,11 +7,17 @@ use std::{
 
 fn main() {
     let listener = TcpListener::bind("127.0.0.1:6969").unwrap();
+    let pool = ThreadPool::new(4);
 
     for stream in listener.incoming() {
         let stream = stream.unwrap();
-        handle_conn(stream);
+
+        pool.execute(|| {
+            handle_conn(stream);
+        });
     }
+
+    println!("Shutting down.");
 }
 
 fn handle_conn(mut stream: TcpStream) {
@@ -22,11 +29,6 @@ fn handle_conn(mut stream: TcpStream) {
         .collect();
 
     let request_line: Vec<_> = http_request[0].split(" ").collect();
-    if request_line[1] == "/favicon.ico" {
-        let response = "HTTP/1.1 404 NOT FOUND";
-        stream.write_all(response.as_bytes()).unwrap()
-    }
-
     if request_line[1] == "/" && request_line[2] == "HTTP/1.1" {
         println!("Server responding to request for: {path:?}; using {protocol:?} protocol.", path = request_line[1], protocol = request_line[2]);
 
