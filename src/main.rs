@@ -30,7 +30,11 @@ fn handle_conn(mut stream: TcpStream) {
 
     let request_line: Vec<_> = http_request[0].split(" ").collect();
     if request_line[1] == "/" && request_line[2] == "HTTP/1.1" {
-        println!("Server responding to request for: {path:?}; using {protocol:?} protocol.", path = request_line[1], protocol = request_line[2]);
+        println!(
+            "Server responding to request for: {path:?}; using {protocol:?} protocol.",
+            path = request_line[1],
+            protocol = request_line[2]
+        );
 
         let status_line = "HTTP/1.1 200 OK";
         let contents = fs::read_to_string("pages/home.html").unwrap();

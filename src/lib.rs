@@ -24,7 +24,7 @@ impl ThreadPool {
             workers.push(Worker::new(id, Arc::clone(&receiver)));
         }
 
-                ThreadPool {
+        ThreadPool {
             workers,
             sender: Some(sender),
         }
