@@ -1,0 +1,3 @@
+[submodule "public/notes"]
+	path = public/notes
+	url = git@github.com:datsfilipe/shareable-notes.git

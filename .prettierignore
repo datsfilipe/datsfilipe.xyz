@@ -1,0 +1,7 @@
+node_modules
+build
+dist
+public/_app
+*.min.js
+*.min.css
+bun.lock

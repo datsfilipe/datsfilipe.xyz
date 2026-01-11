@@ -1,10 +1,15 @@
 {
-  "name": "elysia-static",
-  "version": "1.0.50",
+  "name": "datsfilipe.xyz",
+  "version": "1.0.0",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "bun run --watch src/index.ts",
-    "build": "bun build --compile --target bun --outfile server src/index.ts"
+    "dev": "bun x concurrently \"bun run dev:server\" \"bun run dev:client\"",
+    "dev:server": "bun run --watch src/server/index.ts",
+    "dev:client": "bun build --watch ./src/client/index.tsx --outdir ./public/_app --entry-naming home.[ext] & bun build --watch ./src/client/viewer.tsx --outdir ./public/_app --entry-naming viewer.[ext]",
+    "build:client": "bun build ./src/client/index.tsx --outdir ./public/_app --entry-naming home.[hash].[ext] --minify && bun build ./src/client/viewer.tsx --outdir ./public/_app --entry-naming viewer.[hash].[ext] --minify",
+    "build:server": "bun build --compile --target bun --outfile server src/server/index.ts",
+    "build": "bun run build:client && bun run build:server",
+    "format:check": "prettier --config .prettierrc --ignore-path .prettierignore --check .",
+    "format": "prettier --config .prettierrc --ignore-path .prettierignore --write ."
   },
   "dependencies": {
     "@elysiajs/eden": "^1.4.5",
@@ -12,8 +17,14 @@
     "@tanstack/react-query": "^5.90.10",
     "clsx": "^2.1.1",
     "elysia": "^1.4.16",
+    "highlight.js": "^11.11.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "react-markdown": "^10.1.0",
+    "rehype-autolink-headings": "^7.1.0",
+    "rehype-highlight": "^7.0.2",
+    "rehype-slug": "^6.0.0",
+    "remark-gfm": "^4.0.1",
     "tailwindcss": "^4.1.17"
   },
   "devDependencies": {
