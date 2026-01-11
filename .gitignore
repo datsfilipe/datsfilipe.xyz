@@ -31,6 +31,5 @@ yarn-error.log*
 package-lock.json
 **/*.bun
 
-server
 .direnv
 public/_app
