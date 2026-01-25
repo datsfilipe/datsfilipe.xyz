@@ -20,6 +20,7 @@ export async function generateIgnorePatterns(dir: string): Promise<string[]> {
     '.woff2',
     '.ttf',
     '.eot',
+    '.pdf',
   ]);
 
   const allowedDirs = new Set(['_app', 'notes', 'rices', 'blog']);
