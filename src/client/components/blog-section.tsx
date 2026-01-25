@@ -24,36 +24,33 @@ export function BlogSection() {
   }, []);
 
   return (
-    <section id="blog" className="w-full max-w-4xl mx-auto py-20 px-4">
+    <section id="blog" className="w-full max-w-6xl mx-auto py-20 px-4">
       <div className="mb-12">
-        <h2 className="text-5xl md:text-7xl font-bold mb-4">Blog</h2>
-        <p className="font-mono text-sm opacity-60">thoughts & articles</p>
+        <h2 className="text-5xl md:text-6xl font-bold mb-3">Blog</h2>
+        <p className="font-mono text-sm text-muted">thoughts & articles</p>
       </div>
 
-      <div className="border border-fg">
-        {loading ? (
-          <div className="p-8 text-center font-mono">Loading...</div>
-        ) : posts.length === 0 ? (
-          <div className="p-12 text-center font-mono opacity-60">
-            No articles yet
-          </div>
-        ) : (
-          <div>
-            {posts.map((post, idx) => (
-              <a
-                key={post.path}
-                href={post.path}
-                className={`block p-6 hover:bg-fg hover:text-bg transition-colors ${
-                  idx !== posts.length - 1 ? 'border-b border-fg' : ''
-                }`}
-              >
-                <h3 className="text-xl font-bold mb-2">{post.title}</h3>
-                <span className="text-sm font-mono opacity-60">{post.category}</span>
-              </a>
-            ))}
-          </div>
-        )}
-      </div>
+      {loading ? (
+        <div className="text-center py-8 font-mono text-sm text-muted">Loading...</div>
+      ) : posts.length === 0 ? (
+        <div className="card-bordered p-12 text-center font-mono text-muted">
+          No articles yet
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {posts.map((post) => (
+            <a
+              key={post.path}
+              href={post.path}
+              className="card-interactive p-6 group"
+            >
+              <span className="font-mono text-xs uppercase block mb-3 opacity-40 group-hover:opacity-60">{post.category}</span>
+              <h3 className="text-xl font-bold mb-2 group-hover:translate-x-1 transition-transform">{post.title}</h3>
+              <span className="font-mono text-xs opacity-60 group-hover:opacity-80">Read more →</span>
+            </a>
+          ))}
+        </div>
+      )}
     </section>
   );
 }
