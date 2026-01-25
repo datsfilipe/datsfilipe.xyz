@@ -34,6 +34,8 @@ let assets = await resolveAssets();
 
 const darkModeScript = `<script>(function(){var t=localStorage.getItem('theme'),d=t==='dark'||(!t&&matchMedia('(prefers-color-scheme:dark)').matches);if(d)document.documentElement.classList.add('dark')})()</script>`;
 
+const favicon = `<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✌🏻</text></svg>">`;
+
 export const app = new Elysia()
   .ws('/live-reload', {
     open(ws) {
@@ -61,6 +63,7 @@ export const app = new Elysia()
 <html lang="en">
   <head>
     ${darkModeScript}
+    ${favicon}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>datsfilipe.xyz</title>
@@ -107,6 +110,7 @@ export const app = new Elysia()
 <html lang="en">
   <head>
     ${darkModeScript}
+    ${favicon}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notes Browser</title>
@@ -127,6 +131,7 @@ export const app = new Elysia()
 <html lang="en">
   <head>
     ${darkModeScript}
+    ${favicon}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog</title>
@@ -184,6 +189,7 @@ export const app = new Elysia()
 <html lang="en">
   <head>
     ${darkModeScript}
+    ${favicon}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog Post</title>
@@ -241,6 +247,7 @@ export const app = new Elysia()
 <html lang="en">
   <head>
     ${darkModeScript}
+    ${favicon}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notes Viewer</title>
