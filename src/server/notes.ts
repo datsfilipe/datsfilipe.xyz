@@ -10,7 +10,7 @@ export interface Note {
 export async function getAllNotes(): Promise<Note[]> {
   const notes: Note[] = [];
 
-  async function scan(dir: string, category: string = 'General') {
+  async function scan(dir: string, categoryPath: string[] = []) {
     try {
       const entries = await readdir(dir, { withFileTypes: true });
 
@@ -22,7 +22,7 @@ export async function getAllNotes(): Promise<Note[]> {
         const fullPath = join(dir, entry.name);
 
         if (entry.isDirectory()) {
-          await scan(fullPath, entry.name);
+          await scan(fullPath, [...categoryPath, entry.name]);
         } else if (entry.name.endsWith('.md')) {
           const title = entry.name
             .replace(/\.md$/, '')
@@ -32,12 +32,12 @@ export async function getAllNotes(): Promise<Note[]> {
           notes.push({
             title,
             path: fullPath.replace('public', '').replace(/\.md$/, ''),
-            category: category || 'general',
+            category: categoryPath.join('/') || 'general',
           });
         }
       }
     } catch (error) {
-      console.warn(`could not scan ${dir}:`, error);
+      console.warn(`scan failed: ${dir}:`, error);
     }
   }
 

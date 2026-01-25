@@ -22,7 +22,7 @@ export async function generateIgnorePatterns(dir: string): Promise<string[]> {
     '.eot',
   ]);
 
-  const allowedDirs = new Set(['_app', 'notes']);
+  const allowedDirs = new Set(['_app', 'notes', 'rices', 'blog']);
 
   async function scan(fullPath: string, relativePath: string = '') {
     const entries = await readdir(fullPath, { withFileTypes: true });
