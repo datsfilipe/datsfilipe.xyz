@@ -1,0 +1,44 @@
+[
+  {
+    "id": "trxsh",
+    "name": "trxsh",
+    "description": "A modern trash CLI manager for Linux with restore capabilities, FZF integration, and permanent deletion. Never lose files again.",
+    "url": "https://github.com/datsfilipe/trxsh",
+    "stars": "50+",
+    "featured": true,
+    "links": {
+      "cargo": "https://crates.io/crates/trxsh",
+      "aur": "https://aur.archlinux.org/packages/trxsh"
+    },
+    "highlights": [
+      "FZF-powered interactive selection",
+      "Safe file recovery from trash",
+      "Permanent deletion support",
+      "Cross-platform Rust implementation"
+    ]
+  },
+  {
+    "id": "vesper-nvim",
+    "name": "vesper.nvim",
+    "description": "A dark, elegant Neovim colorscheme inspired by the evening sky. Carefully crafted colors for extended coding sessions.",
+    "url": "https://github.com/datsfilipe/vesper.nvim",
+    "highlights": [
+      "Low-contrast dark theme",
+      "TreeSitter support",
+      "LSP semantic highlighting",
+      "Plugin integrations"
+    ]
+  },
+  {
+    "id": "nix-envs",
+    "name": "nix-envs",
+    "description": "Declarative development environments using Nix flakes. Reproducible shells for various programming languages and tools.",
+    "url": "https://github.com/datsfilipe/nix-envs",
+    "highlights": [
+      "Language-specific dev shells",
+      "Flake-based configurations",
+      "Zero-installation setup",
+      "Reproducible builds"
+    ]
+  }
+]

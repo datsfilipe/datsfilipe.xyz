@@ -1,0 +1,121 @@
+[
+  {
+    "id": "waking-up",
+    "title": "Waking up",
+    "subtitle": "Oxocarbon (mainly)",
+    "file": "waking_up.jpg",
+    "fullImage": "waking_up.png"
+  },
+  {
+    "id": "hatsune-miku",
+    "title": "Hatsune Miku",
+    "subtitle": "Gruvcarbon",
+    "file": "hatsune_miku.jpg",
+    "fullImage": "hatsune_miku.png"
+  },
+  {
+    "id": "shinji-and-i",
+    "title": "Shinji and I",
+    "subtitle": "[BSPWM]: Evangelion",
+    "file": "shinji_and_I.jpg",
+    "fullImage": "shinji_and_I.png"
+  },
+  {
+    "id": "soleva",
+    "title": "Soleva",
+    "subtitle": "Dark theme",
+    "file": "soleva.jpg",
+    "fullImage": "soleva.png"
+  },
+  {
+    "id": "gojobox",
+    "title": "Gojobox",
+    "subtitle": "JJK theme",
+    "file": "gojobox.jpg",
+    "fullImage": "gojobox.png"
+  },
+  {
+    "id": "hyprland-vesper",
+    "title": "Hyprland Vesper",
+    "subtitle": "Hyprland compositor",
+    "file": "hyprland_vesper.jpg",
+    "fullImage": "hyprland_vesper.png"
+  },
+  {
+    "id": "i3-vesper",
+    "title": "i3 Vesper",
+    "subtitle": "i3wm configuration",
+    "file": "i3_vesper.jpg",
+    "fullImage": "i3_vesper.png"
+  },
+  {
+    "id": "i3-eva",
+    "title": "i3 Eva",
+    "subtitle": "i3wm Evangelion theme",
+    "file": "i3_eva.jpg",
+    "fullImage": "i3_eva.png"
+  },
+  {
+    "id": "i3-gruvbox",
+    "title": "i3 Gruvbox",
+    "subtitle": "i3wm Gruvbox theme",
+    "file": "i3_gruvbox.jpg",
+    "fullImage": "i3_gruvbox.png"
+  },
+  {
+    "id": "i3-gruvbox-2",
+    "title": "i3 Gruvbox 2",
+    "subtitle": "i3wm Gruvbox variant",
+    "file": "i3_gruvbox_2.jpg",
+    "fullImage": "i3_gruvbox_2.png"
+  },
+  {
+    "id": "niri-vesper",
+    "title": "Niri Vesper",
+    "subtitle": "Niri compositor",
+    "file": "niri_vesper.jpg",
+    "fullImage": "niri_vesper.png"
+  },
+  {
+    "id": "niri-vesper-2",
+    "title": "Niri Vesper 2",
+    "subtitle": "Niri compositor variant",
+    "file": "niri_vesper_2.jpg",
+    "fullImage": "niri_vesper_2.png"
+  },
+  {
+    "id": "bspwm-carbon",
+    "title": "BSPWM Carbon",
+    "subtitle": "BSPWM carbon theme",
+    "file": "bspwm_carbon.jpg",
+    "fullImage": "bspwm_carbon.png"
+  },
+  {
+    "id": "bspwm-carbon-2",
+    "title": "BSPWM Carbon 2",
+    "subtitle": "BSPWM carbon variant",
+    "file": "bspwm_carbon_2.jpg",
+    "fullImage": "bspwm_carbon_2.png"
+  },
+  {
+    "id": "bspwm-paradise",
+    "title": "BSPWM Paradise",
+    "subtitle": "BSPWM paradise theme",
+    "file": "bspwm_paradise.jpg",
+    "fullImage": "bspwm_paradise.png"
+  },
+  {
+    "id": "gnome-min",
+    "title": "Gnome Min",
+    "subtitle": "Minimal Gnome setup",
+    "file": "gnome_min.jpg",
+    "fullImage": "gnome_min.png"
+  },
+  {
+    "id": "gnome-paradise",
+    "title": "Gnome Paradise",
+    "subtitle": "Gnome paradise theme",
+    "file": "gnome_paradise.jpg",
+    "fullImage": "gnome_paradise.png"
+  }
+]
