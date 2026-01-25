@@ -101,7 +101,7 @@ function NoteViewer() {
   if (loading) {
     return (
       <div className="min-h-screen bg-bg text-fg flex items-center justify-center">
-        <div className="text-center font-mono">loading...</div>
+        <div className="text-center font-mono text-muted">loading...</div>
       </div>
     );
   }
@@ -109,10 +109,10 @@ function NoteViewer() {
   if (error || !note) {
     return (
       <div className="min-h-screen bg-bg text-fg flex items-center justify-center">
-        <div className="text-center">
-          <div className="text-2xl font-bold mb-2">404</div>
-          <div className="font-mono">{error || 'something went wrong'}</div>
-          <a href="/" className="mt-4 inline-block font-mono hover:underline">
+        <div className="card-bordered p-12 text-center">
+          <div className="text-6xl font-bold mb-4 text-muted">404</div>
+          <div className="font-mono text-muted mb-6">{error || 'something went wrong'}</div>
+          <a href="/" className="btn btn-outline">
             ← back home
           </a>
         </div>
@@ -128,15 +128,15 @@ function NoteViewer() {
       <DarkModeToggle />
       <div className="max-w-4xl mx-auto px-4 py-12">
         <div className="mb-8">
-          <a href="/" className="font-mono hover:underline">
+          <a href="/" className="btn btn-outline inline-flex items-center gap-2">
             ← back home
           </a>
         </div>
-        <article className="border border-fg p-8">
-          {displayTitle && <h1 className="text-4xl font-bold mb-8">{displayTitle}</h1>}
+        <article className="card-bordered p-8 md:p-12">
+          {displayTitle && <h1 className="text-3xl md:text-4xl font-bold mb-8">{displayTitle}</h1>}
 
           {frontmatter.cover_image && (
-            <div className="mb-8 border border-fg">
+            <div className="mb-8 rounded-lg overflow-hidden shadow-card">
               <img
                 src={frontmatter.cover_image}
                 alt={displayTitle || 'Cover image'}
