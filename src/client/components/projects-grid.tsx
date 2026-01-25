@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { ExternalLink } from 'lucide-react';
 import type { Project } from '@server/projects';
 
 export function ProjectsGrid() {
@@ -19,7 +20,11 @@ export function ProjectsGrid() {
   }, []);
 
   if (loading) {
-    return <div className="text-center py-8">Loading projects...</div>;
+    return (
+      <section id="projects" className="w-full max-w-6xl mx-auto py-20 px-4">
+        <div className="text-center py-8 font-mono text-sm text-muted">Loading projects...</div>
+      </section>
+    );
   }
 
   if (projects.length === 0) {
@@ -32,156 +37,163 @@ export function ProjectsGrid() {
   return (
     <section id="projects" className="w-full max-w-6xl mx-auto py-20 px-4">
       <div className="mb-12">
-        <h2 className="text-5xl md:text-7xl font-bold mb-4">Projects</h2>
-        <p className="font-mono text-sm opacity-60">building tools & experiences</p>
+        <h2 className="text-5xl md:text-6xl font-bold mb-3">Projects</h2>
+        <p className="font-mono text-sm text-muted">building tools & experiences</p>
       </div>
 
       {featured && (
-        <div className="border border-fg mb-8">
-          <div className="border-b border-fg px-6 py-3 flex items-center justify-between">
-            <span className="font-mono text-xs opacity-60">[FEATURED]</span>
-            {featured.stars && <span className="font-mono text-xs">★ {featured.stars}</span>}
+        <div className="card-bordered p-8 md:p-10 mb-8 hover:scale-[1.01] transition-all duration-300 group">
+          <div className="flex items-start justify-between mb-6">
+            <div>
+              <span className="font-mono text-xs text-subtle block mb-2">#001 • FEATURED</span>
+              <h3 className="text-3xl md:text-4xl font-bold">{featured.name}</h3>
+            </div>
+            {featured.stars && (
+              <span className="font-mono text-sm px-3 py-1 bg-surface-1 rounded-md">★ {featured.stars}</span>
+            )}
           </div>
 
-          <div className="p-8 md:p-12">
-            <h3 className="text-4xl md:text-5xl font-bold mb-6">{featured.name}</h3>
-            <p className="text-lg md:text-xl mb-8 leading-relaxed opacity-90">{featured.description}</p>
+          <p className="text-base md:text-lg mb-8 leading-relaxed text-muted max-w-3xl">{featured.description}</p>
 
-            {featured.video && (
-              <div className="mb-8 border border-fg">
-                <video
-                  controls
-                  className="w-full"
-                  preload="metadata"
-                >
-                  <source src={featured.video} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              </div>
-            )}
+          {featured.video && (
+            <div className="mb-8 rounded-lg overflow-hidden shadow-card">
+              <video
+                controls
+                className="w-full"
+                preload="metadata"
+              >
+                <source src={featured.video} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          )}
 
-            {featured.highlights && featured.highlights.length > 0 && (
-              <div className="mb-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {featured.highlights.map((highlight, idx) => (
-                    <div key={idx} className="border border-fg p-4">
-                      <span className="font-mono text-xs opacity-60">0{idx + 1}</span>
-                      <p className="mt-2 text-sm">{highlight}</p>
-                    </div>
-                  ))}
+          {featured.highlights && featured.highlights.length > 0 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-8">
+              {featured.highlights.map((highlight, idx) => (
+                <div key={idx} className="bg-surface-1 rounded-md p-4 opacity-70 group-hover:opacity-100 transition-opacity">
+                  <p className="font-mono text-xs">{highlight}</p>
                 </div>
-              </div>
-            )}
+              ))}
+            </div>
+          )}
 
-            <div className="flex flex-wrap gap-4 font-mono text-sm pt-6 border-t border-fg">
+          <div className="flex flex-wrap gap-3 font-mono text-sm pt-6 border-t border-subtle">
+            <a
+              href={featured.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-outline hover:scale-105 active:scale-95 inline-flex items-center gap-1.5"
+            >
+              <ExternalLink size={14} />
+              github
+            </a>
+            {featured.links?.cargo && (
               <a
-                href={featured.url}
+                href={featured.links.cargo}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-4 py-2 border border-fg hover:bg-fg hover:text-bg transition-colors"
+                className="btn btn-outline hover:scale-105 active:scale-95 inline-flex items-center gap-1.5"
               >
-                → github
+                <ExternalLink size={14} />
+                crates.io
               </a>
-              {featured.links?.cargo && (
-                <a
-                  href={featured.links.cargo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-4 py-2 border border-fg hover:bg-fg hover:text-bg transition-colors"
-                >
-                  → crates.io
-                </a>
-              )}
-              {featured.links?.aur && (
-                <a
-                  href={featured.links.aur}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-4 py-2 border border-fg hover:bg-fg hover:text-bg transition-colors"
-                >
-                  → aur
-                </a>
-              )}
-              {featured.links?.npm && (
-                <a
-                  href={featured.links.npm}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-4 py-2 border border-fg hover:bg-fg hover:text-bg transition-colors"
-                >
-                  → npm
-                </a>
-              )}
-            </div>
+            )}
+            {featured.links?.aur && (
+              <a
+                href={featured.links.aur}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-outline hover:scale-105 active:scale-95 inline-flex items-center gap-1.5"
+              >
+                <ExternalLink size={14} />
+                aur
+              </a>
+            )}
+            {featured.links?.npm && (
+              <a
+                href={featured.links.npm}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-outline hover:scale-105 active:scale-95 inline-flex items-center gap-1.5"
+              >
+                <ExternalLink size={14} />
+                npm
+              </a>
+            )}
           </div>
         </div>
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {other.map((project, idx) => {
           const isLast = idx === other.length - 1;
           const isOdd = other.length % 2 !== 0;
           const shouldSpan = isLast && isOdd;
+          const projectNum = String(idx + 2).padStart(3, '0');
 
           return (
             <div
               key={project.id}
-              className={`border border-fg ${shouldSpan ? 'md:col-span-2' : ''}`}
+              className={`card-bordered p-6 hover:scale-[1.02] transition-all duration-300 group ${shouldSpan ? 'md:col-span-2' : ''}`}
             >
-              <div className="p-6">
-                <h3 className="text-2xl font-bold mb-3">{project.name}</h3>
-                <p className="mb-6 leading-relaxed text-sm opacity-90">{project.description}</p>
+              <span className="font-mono text-xs text-subtle block mb-2">#{projectNum}</span>
+              <h3 className="text-xl font-bold mb-3 group-hover:translate-x-1 transition-transform">{project.name}</h3>
+              <p className="mb-6 leading-relaxed text-sm text-muted">{project.description}</p>
 
-                {project.highlights && project.highlights.length > 0 && (
-                  <ul className="mb-6 space-y-2">
-                    {project.highlights.slice(0, 3).map((highlight, idx) => (
-                      <li key={idx} className="font-mono text-xs opacity-60">
-                        • {highlight}
-                      </li>
-                    ))}
-                  </ul>
-                )}
+              {project.highlights && project.highlights.length > 0 && (
+                <div className="mb-6 space-y-2">
+                  {project.highlights.slice(0, 3).map((highlight, hIdx) => (
+                    <div key={hIdx} className="font-mono text-xs text-subtle opacity-70 group-hover:opacity-100 transition-opacity">
+                      • {highlight}
+                    </div>
+                  ))}
+                </div>
+              )}
 
-                <div className="flex flex-wrap gap-3 font-mono text-xs pt-4 border-t border-fg">
+              <div className="flex flex-wrap gap-3 font-mono text-xs pt-4 border-t border-subtle">
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 hover:underline text-muted hover:opacity-100 transition-opacity"
+                >
+                  <ExternalLink size={12} />
+                  github
+                </a>
+                {project.links?.cargo && (
                   <a
-                    href={project.url}
+                    href={project.links.cargo}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:underline"
+                    className="inline-flex items-center gap-1 hover:underline text-muted hover:opacity-100 transition-opacity"
                   >
-                    → github
+                    <ExternalLink size={12} />
+                    crates.io
                   </a>
-                  {project.links?.cargo && (
-                    <a
-                      href={project.links.cargo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:underline"
-                    >
-                      → crates.io
-                    </a>
-                  )}
-                  {project.links?.aur && (
-                    <a
-                      href={project.links.aur}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:underline"
-                    >
-                      → aur
-                    </a>
-                  )}
-                  {project.links?.npm && (
-                    <a
-                      href={project.links.npm}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:underline"
-                    >
-                      → npm
-                    </a>
-                  )}
-                </div>
+                )}
+                {project.links?.aur && (
+                  <a
+                    href={project.links.aur}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 hover:underline text-muted hover:opacity-100 transition-opacity"
+                  >
+                    <ExternalLink size={12} />
+                    aur
+                  </a>
+                )}
+                {project.links?.npm && (
+                  <a
+                    href={project.links.npm}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 hover:underline text-muted hover:opacity-100 transition-opacity"
+                  >
+                    <ExternalLink size={12} />
+                    npm
+                  </a>
+                )}
               </div>
             </div>
           );
