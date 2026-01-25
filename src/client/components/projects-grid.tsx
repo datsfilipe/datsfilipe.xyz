@@ -38,14 +38,14 @@ export function ProjectsGrid() {
     <section id="projects" className="w-full max-w-6xl mx-auto py-20 px-4">
       <div className="mb-12">
         <h2 className="text-5xl md:text-6xl font-bold mb-3">Projects</h2>
-        <p className="font-mono text-sm text-muted">building tools & experiences</p>
+        <p className="font-mono text-sm text-muted">OSS maintained by me</p>
       </div>
 
       {featured && (
         <div className="card-bordered p-8 md:p-10 mb-8 hover:scale-[1.01] transition-all duration-300 group">
           <div className="flex items-start justify-between mb-6">
             <div>
-              <span className="font-mono text-xs text-subtle block mb-2">#001 • FEATURED</span>
+              <span className="font-mono text-xs text-subtle block mb-2">#001 • Featured</span>
               <h3 className="text-3xl md:text-4xl font-bold">{featured.name}</h3>
             </div>
             {featured.stars && (
@@ -144,7 +144,7 @@ export function ProjectsGrid() {
               {project.highlights && project.highlights.length > 0 && (
                 <div className="mb-6 space-y-2">
                   {project.highlights.slice(0, 3).map((highlight, hIdx) => (
-                    <div key={hIdx} className="font-mono text-xs text-subtle opacity-70 group-hover:opacity-100 transition-opacity">
+                    <div key={hIdx} className="font-mono text-xs text-muted group-hover:opacity-100 transition-opacity">
                       • {highlight}
                     </div>
                   ))}

@@ -30,6 +30,7 @@ export function RicesGallery() {
       <div className="mb-12">
         <h2 className="text-5xl md:text-6xl font-bold mb-3">Rices</h2>
         <p className="font-mono text-sm text-muted">unix desktop customization</p>
+        <p className="font-mono text-sm mt-2">One of my hobbies has always been customizing my desktop environment and, throughout the years, I've kept a bunch of these registered. I used to have an account on "r/unixporn" and most of those were posted there initially, but since I've deleted my reddit account, this now is the only place to find them.</p>
       </div>
 
       {loading ? (
@@ -41,31 +42,53 @@ export function RicesGallery() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {rices.map((rice, idx) => (
-            <a
-              key={rice.id}
-              href={rice.fullImage ? `/rices/${rice.fullImage}` : `/rices/${rice.file}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="card-bordered overflow-hidden group hover:scale-[1.02] transition-all duration-300"
-              title="Click to view full resolution image"
-            >
-              <div className="aspect-video bg-surface-1 flex items-center justify-center overflow-hidden relative">
+            <div key={rice.id} className="relative group">
+              <a
+                href={rice.fullImage ? `/rices/${rice.fullImage}` : `/rices/${rice.file}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="card-bordered overflow-hidden block transition-transform duration-300 group-hover:scale-[1.02]"
+                title="Click to view full resolution image"
+              >
+                <div className="aspect-video bg-surface-1 flex items-center justify-center overflow-hidden relative">
+                  <img
+                    src={`/rices/${rice.file}`}
+                    alt={rice.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                    onError={(e) => {
+                      e.currentTarget.parentElement!.innerHTML = `<span class="font-mono text-xs text-subtle">[${String(idx + 1).padStart(2, '0')}]</span>`;
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
+                </div>
+                <div className="p-4">
+                  <h3 className="font-bold mb-1 group-hover:translate-x-1 transition-transform">{rice.title}</h3>
+                  <p className="text-sm font-mono text-muted">{rice.subtitle}</p>
+                </div>
+              </a>
+
+              {/* Hover overlay showing full image */}
+              <div
+                className="absolute opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-300 z-50 card-bordered overflow-hidden bg-surface-1"
+                style={{
+                  left: '-8px',
+                  top: '-8px',
+                  width: 'calc(100% + 16px)',
+                }}
+              >
                 <img
                   src={`/rices/${rice.file}`}
                   alt={rice.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="w-full h-auto object-contain"
                   loading="lazy"
-                  onError={(e) => {
-                    e.currentTarget.parentElement!.innerHTML = `<span class="font-mono text-xs text-subtle">[${String(idx + 1).padStart(2, '0')}]</span>`;
-                  }}
                 />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
+                <div className="p-4 bg-bg">
+                  <h3 className="font-bold mb-1">{rice.title}</h3>
+                  <p className="text-sm font-mono text-muted">{rice.subtitle}</p>
+                </div>
               </div>
-              <div className="p-4">
-                <h3 className="font-bold mb-1 group-hover:translate-x-1 transition-transform">{rice.title}</h3>
-                <p className="text-sm font-mono text-muted">{rice.subtitle}</p>
-              </div>
-            </a>
+            </div>
           ))}
         </div>
       )}

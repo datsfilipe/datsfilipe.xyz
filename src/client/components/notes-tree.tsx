@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { ChevronRight, ChevronDown, FileText } from 'lucide-react';
 
 interface Note {
   title: string;
@@ -64,9 +65,11 @@ function TreeView({ node, level = 0 }: TreeViewProps) {
         onClick={() => setCollapsed(!collapsed)}
         className="flex items-center gap-2 mb-2 py-1 px-2 -ml-2 rounded-md hover:bg-surface-1 transition-colors group"
       >
-        <span className="text-subtle group-hover:text-muted transition-colors text-xs">
-          {collapsed ? '▶' : '▼'}
-        </span>
+        {collapsed ? (
+          <ChevronRight size={14} className="text-subtle group-hover:text-muted transition-colors" />
+        ) : (
+          <ChevronDown size={14} className="text-subtle group-hover:text-muted transition-colors" />
+        )}
         <span className="font-semibold">{node.name}</span>
         <span className="text-subtle text-xs">({totalNotes})</span>
       </button>
@@ -80,9 +83,10 @@ function TreeView({ node, level = 0 }: TreeViewProps) {
             <a
               key={note.path}
               href={note.path}
-              className="block py-1 px-2 -ml-2 rounded-md text-muted hover:text-fg hover:bg-surface-1 transition-all"
+              className="flex items-center gap-2 py-1 px-2 -ml-2 rounded-md text-muted hover:text-fg hover:bg-surface-1 transition-all"
             >
-              → {note.title}
+              <FileText size={14} className="flex-shrink-0" />
+              <span>{note.title}</span>
             </a>
           ))}
         </div>
@@ -114,7 +118,8 @@ export function NotesTree() {
     <section id="notes" className="w-full max-w-6xl mx-auto py-20 px-4">
       <div className="mb-12">
         <h2 className="text-5xl md:text-6xl font-bold mb-3">Notes</h2>
-        <p className="font-mono text-sm text-muted">brain dump / study notes</p>
+        <p className="font-mono text-sm text-muted">study notes</p>
+        <p className="font-mono text-sm mt-3">These are a mess, not well-written and probably not worth of your attention.</p>
       </div>
 
       <div className="card-bordered p-8">

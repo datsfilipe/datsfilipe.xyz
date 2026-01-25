@@ -1,10 +1,27 @@
-import { readdir } from 'fs/promises';
+import { readdir, readFile } from 'fs/promises';
 import { join } from 'path';
 
 export interface BlogPost {
   title: string;
   path: string;
   category: string;
+}
+
+function parseFrontmatter(content: string): { tags?: string } {
+  const frontmatterMatch = content.match(/^---\s*\n([\s\S]*?)\n---\s*\n/);
+
+  if (!frontmatterMatch) {
+    return {};
+  }
+
+  const frontmatter = frontmatterMatch[1];
+  const tagsMatch = frontmatter.match(/tags:\s*(.+)/);
+
+  if (tagsMatch) {
+    return { tags: tagsMatch[1].trim() };
+  }
+
+  return {};
 }
 
 export async function getAllBlogPosts(): Promise<BlogPost[]> {
@@ -29,10 +46,24 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
             .replace(/[-_]/g, ' ')
             .replace(/\b\w/g, (c) => c.toUpperCase());
 
+          let postCategory = category || 'general';
+
+          try {
+            const content = await readFile(fullPath, 'utf-8');
+            const frontmatter = parseFrontmatter(content);
+
+            if (frontmatter.tags) {
+              const firstTag = frontmatter.tags.split(',')[0].trim();
+              postCategory = firstTag;
+            }
+          } catch (error) {
+            console.warn(`failed to parse frontmatter for ${fullPath}:`, error);
+          }
+
           posts.push({
             title,
             path: fullPath.replace('public', '').replace(/\.md$/, ''),
-            category: category || 'general',
+            category: postCategory,
           });
         }
       }

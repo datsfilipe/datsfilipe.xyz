@@ -4,6 +4,8 @@ import { generateIgnorePatterns } from './allowlist';
 import { getAllNotes } from './notes';
 import { getAllBlogPosts } from './blog';
 import { getProjects } from './projects';
+import { fetchGithubReadme } from './github-cache';
+import { generateRSS } from './rss';
 import chokidar from 'chokidar';
 
 const isDev = process.env.NODE_ENV === 'development';
@@ -100,6 +102,42 @@ export const app = new Elysia()
       return await file.json();
     }
     return [];
+  })
+
+  .get('/api/github-profile', async ({ set }) => {
+    try {
+      const readme = await fetchGithubReadme('datsfilipe', 'datsfilipe');
+      set.headers['Content-Type'] = 'text/markdown; charset=utf-8';
+      set.headers['Cache-Control'] = 'public, max-age=3600';
+      return readme;
+    } catch (error) {
+      set.status = 500;
+      return { error: 'Failed to fetch GitHub profile' };
+    }
+  })
+
+  .get('/api/trxsh-readme', async ({ set }) => {
+    try {
+      const readme = await fetchGithubReadme('datsfilipe', 'trxsh');
+      set.headers['Content-Type'] = 'text/markdown; charset=utf-8';
+      set.headers['Cache-Control'] = 'public, max-age=3600';
+      return readme;
+    } catch (error) {
+      set.status = 500;
+      return { error: 'Failed to fetch trxsh README' };
+    }
+  })
+
+  .get('/rss', async ({ set }) => {
+    try {
+      const rss = await generateRSS();
+      set.headers['Content-Type'] = 'application/rss+xml; charset=utf-8';
+      set.headers['Cache-Control'] = 'public, max-age=3600';
+      return rss;
+    } catch (error) {
+      set.status = 500;
+      return { error: 'Failed to generate RSS feed' };
+    }
   })
 
   .get('/notes', async ({ set }) => {

@@ -2,19 +2,15 @@
   {
     "id": "trxsh",
     "name": "trxsh",
-    "description": "A modern trash CLI manager for Linux with restore capabilities, FZF integration, and permanent deletion. Never lose files again.",
+    "description": "A better trash CLI built in Go that implements the freedesktop.org trash specification.",
     "url": "https://github.com/datsfilipe/trxsh",
-    "stars": "50+",
+    "stars": "3",
     "featured": true,
-    "links": {
-      "cargo": "https://crates.io/crates/trxsh",
-      "aur": "https://aur.archlinux.org/packages/trxsh"
-    },
     "highlights": [
-      "FZF-powered interactive selection",
+      "Implements freedesktop.org trash spec",
       "Safe file recovery from trash",
-      "Permanent deletion support",
-      "Cross-platform Rust implementation"
+      "Built with Go for performance",
+      "Simple CLI interface"
     ]
   },
   {
