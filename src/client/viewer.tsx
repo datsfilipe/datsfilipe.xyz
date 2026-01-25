@@ -5,14 +5,11 @@ import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
-import clsx from 'clsx';
 
 import '@client/styles/global.css';
 import 'highlight.js/styles/github-dark.css';
 import { setupLiveReload } from '@client/libs/live-reload';
-
-const queryClient = new QueryClient();
+import { DarkModeToggle } from '@client/components/dark-mode-toggle';
 
 interface Note {
   content: string;
@@ -20,18 +17,41 @@ interface Note {
   title: string;
 }
 
-interface NoteListItem {
-  path: string;
-  title: string;
-  category: string;
+function parseFrontmatter(content: string): { frontmatter: Record<string, string>; body: string } {
+  const frontmatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/;
+  const match = content.match(frontmatterRegex);
+
+  if (!match) {
+    return { frontmatter: {}, body: content };
+  }
+
+  const frontmatterText = match[1];
+  const body = match[2];
+
+  const frontmatter: Record<string, string> = {};
+  frontmatterText.split('\n').forEach((line) => {
+    const colonIndex = line.indexOf(':');
+    if (colonIndex > 0) {
+      const key = line.slice(0, colonIndex).trim();
+      const value = line.slice(colonIndex + 1).trim();
+      frontmatter[key] = value;
+    }
+  });
+
+  return { frontmatter, body };
 }
 
 function NoteViewer() {
   const [note, setNote] = useState<Note | null>(null);
-  const [notesList, setNotesList] = useState<NoteListItem[] | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [isBrowsing, setIsBrowsing] = useState(false);
+
+  useEffect(() => {
+    if (note) {
+      const { frontmatter } = parseFrontmatter(note.content);
+      document.title = frontmatter.title || note.title;
+    }
+  }, [note]);
 
   useEffect(() => {
     async function loadContent() {
@@ -40,29 +60,17 @@ function NoteViewer() {
         setError(null);
 
         const path = window.location.pathname;
+        const isBlogPath = path.startsWith('/blog');
+        const isNotesPath = path.startsWith('/notes');
 
-        if (!path.startsWith('/notes')) {
+        if (!isBlogPath && !isNotesPath) {
           throw new Error('invalid path');
         }
-
-        if (path === '/notes' || path === '/notes/') {
-          setIsBrowsing(true);
-
-          const response = await fetch('/api/notes');
-          if (!response.ok) throw new Error('failed to load list');
-
-          const data = await response.json();
-          setNotesList(data.notes);
-
-          return;
-        }
-
-        setIsBrowsing(false);
 
         const markdownUrl = `${path}.md`;
         const response = await fetch(markdownUrl);
         if (!response.ok) {
-          throw new Error(`note not found: ${path}`);
+          throw new Error(`${isBlogPath ? 'post' : 'note'} not found: ${path}`);
         }
 
         const content = await response.text();
@@ -92,134 +100,71 @@ function NoteViewer() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="text-center">
-          <div className="text-4xl mb-4">📝</div>
-          <div className="text-xl text-gray-600">loading...</div>
-        </div>
+      <div className="min-h-screen bg-bg text-fg flex items-center justify-center">
+        <div className="text-center font-mono">loading...</div>
       </div>
     );
   }
 
-  if (error || (!note && !notesList)) {
+  if (error || !note) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
+      <div className="min-h-screen bg-bg text-fg flex items-center justify-center">
         <div className="text-center">
-          <div className="text-6xl mb-4">!</div>
-          <div className="text-2xl font-bold mb-2">
-            {isBrowsing ? 'failed to load notes' : '404'}
-          </div>
-          <div className="text-gray-600">{error || 'something went wrong'}</div>
-          <a href="/" className="mt-4 inline-block text-blue-500 hover:underline">
-            {'<-'}
+          <div className="text-2xl font-bold mb-2">404</div>
+          <div className="font-mono">{error || 'something went wrong'}</div>
+          <a href="/" className="mt-4 inline-block font-mono hover:underline">
+            ← back home
           </a>
         </div>
       </div>
     );
   }
 
-  if (isBrowsing && notesList) {
-    const categorizedNotes = notesList.reduce(
-      (acc, note) => {
-        if (!acc[note.category]) {
-          acc[note.category] = [];
-        }
-        acc[note.category].push(note);
-        return acc;
-      },
-      {} as Record<string, NoteListItem[]>,
-    );
-
-    return (
-      <div className="min-h-screen bg-gray-50">
-        <header className="bg-white border-b border-gray-200">
-          <div className="container mx-auto px-4 py-6 max-w-6xl">
-            <div className="flex items-center justify-between">
-              <a href="/" className="text-sm text-gray-600 hover:text-gray-900">
-                {'<-'}
-              </a>
-              <h1 className="text-2xl font-bold text-gray-900">browse</h1>
-              <div className="w-16" />
-            </div>
-          </div>
-        </header>
-
-        <main className="container mx-auto px-4 py-8 max-w-6xl">
-          <div className="space-y-8">
-            {Object.entries(categorizedNotes).map(([category, notes]) => (
-              <div key={category} className="bg-white rounded-lg shadow-sm p-6">
-                <h2 className="text-xl font-bold mb-4 text-gray-900 capitalize">{category}</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-                  {notes.map((note) => (
-                    <a
-                      key={note.path}
-                      href={note.path}
-                      className="block p-4 border border-gray-200 rounded-lg hover:border-blue-400 hover:bg-blue-50 transition-all"
-                    >
-                      <div className="font-medium text-gray-900">{note.title}</div>
-                    </a>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </main>
-      </div>
-    );
-  }
+  const { frontmatter, body } = parseFrontmatter(note.content);
+  const displayTitle = frontmatter.title || note.title;
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="bg-white border-b border-gray-200 sticky top-0 z-10">
-        <div className="container mx-auto px-4 py-4 max-w-4xl">
-          <div className="flex items-center justify-between">
-            <a href="/notes" className="text-sm text-gray-600 hover:text-gray-900">
-              {'<-'}
-            </a>
-            <h1 className="text-xl font-bold text-gray-900">{note?.title}</h1>
-            <div className="w-20" />
-          </div>
+    <div className="min-h-screen bg-bg text-fg">
+      <DarkModeToggle />
+      <div className="max-w-4xl mx-auto px-4 py-12">
+        <div className="mb-8">
+          <a href="/" className="font-mono hover:underline">
+            ← back home
+          </a>
         </div>
-      </header>
+        <article className="border border-fg p-8">
+          {displayTitle && <h1 className="text-4xl font-bold mb-8">{displayTitle}</h1>}
 
-      <main className="container mx-auto px-4 py-8 max-w-4xl">
-        <article
-          className={clsx(
-            'prose prose-lg prose-gray',
-            'prose-headings:font-bold',
-            'prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline',
-            'prose-code:text-pink-600 prose-code:bg-gray-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded',
-            'prose-pre:bg-gray-900 prose-pre:text-gray-100',
-            'prose-img:rounded-lg prose-img:shadow-md',
-            'max-w-none',
-            'bg-white p-8 rounded-lg shadow-sm',
+          {frontmatter.cover_image && (
+            <div className="mb-8 border border-fg">
+              <img
+                src={frontmatter.cover_image}
+                alt={displayTitle || 'Cover image'}
+                className="w-full"
+                loading="lazy"
+              />
+            </div>
           )}
-        >
-          <ReactMarkdown
-            remarkPlugins={[remarkGfm]}
-            rehypePlugins={[
-              rehypeHighlight,
-              rehypeSlug,
-              [rehypeAutolinkHeadings, { behavior: 'wrap' }],
-            ]}
-          >
-            {note?.content || ''}
-          </ReactMarkdown>
+
+          <div className="prose max-w-none">
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              rehypePlugins={[
+                rehypeHighlight,
+                rehypeSlug,
+                [rehypeAutolinkHeadings, { behavior: 'wrap' }],
+              ]}
+            >
+              {body}
+            </ReactMarkdown>
+          </div>
         </article>
-      </main>
+      </div>
     </div>
   );
 }
 
-function App() {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <NoteViewer />
-    </QueryClientProvider>
-  );
-}
-
 const root = createRoot(document.getElementById('viewer')!);
-root.render(<App />);
+root.render(<NoteViewer />);
 
 setupLiveReload();
