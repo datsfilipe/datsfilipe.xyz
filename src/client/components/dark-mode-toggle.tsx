@@ -23,9 +23,9 @@ export function DarkModeToggle() {
     <button
       onClick={toggle}
       aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
-      className="fixed top-4 right-4 px-4 py-2 font-mono text-sm border border-fg bg-bg text-fg hover:bg-fg hover:text-bg transition-colors z-50"
+      className="fixed top-6 right-6 w-10 h-10 flex items-center justify-center font-mono text-lg bg-surface-1 rounded-lg card-elevated hover:shadow-card-hover hover:scale-105 active:scale-95 transition-all z-50"
     >
-      {isDark ? 'Light' : 'Dark'}
+      {isDark ? '☀' : '☾'}
     </button>
   );
 }
