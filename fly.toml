@@ -1,6 +1,6 @@
 # fly.toml - Fly.io configuration
 
-app = "datsfilipe-xyz"
+app = "datsfilipe-website"
 primary_region = "gru"
 
 [build]
