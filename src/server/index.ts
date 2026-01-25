@@ -51,7 +51,8 @@ export const app = new Elysia()
   })
 
   .get('/', async ({ set }) => {
-    const resumeUrl = process.env.RESUME_URL || '';
+    const resumeUrl = process.env.RESUME_URL;
+    const resumeScript = resumeUrl ? `<script>window.__RESUME_URL__=${JSON.stringify(resumeUrl)};</script>` : '';
 
     set.headers['Content-Type'] = 'text/html; charset=utf-8';
     set.headers['Cache-Control'] = 'no-cache';
@@ -66,7 +67,7 @@ export const app = new Elysia()
     <link rel="stylesheet" href="${assets.homeStyle}">
     <link rel="prefetch" href="${assets.viewerStyle}" as="style">
     <link rel="prefetch" href="${assets.viewerScript}" as="script">
-    <script>window.__RESUME_URL__ = ${JSON.stringify(resumeUrl)};</script>
+    ${resumeScript}
   </head>
   <body>
     <div id="elysia"></div>
