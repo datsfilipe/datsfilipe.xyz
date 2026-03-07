@@ -4,8 +4,15 @@ import { D3Tooltip } from "../components/d3-tooltip";
 import { RicingTooltip } from "../components/ricing-tooltip";
 import { posts } from "../data/posts";
 import { projects } from "../data/projects";
+import { useMeta } from "../hooks/use-meta";
 
 export function Home() {
+  useMeta({
+    title: "datsfilipe",
+    description: "Filipe Lima — full-stack developer. Blog, projects, and rices.",
+    ogImage: "/og-image.png",
+    url: "/",
+  });
   const latestPosts = posts.slice(0, 4);
   const displayProjects = projects;
 

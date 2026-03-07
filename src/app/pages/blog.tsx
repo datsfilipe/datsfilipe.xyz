@@ -1,7 +1,15 @@
 import { Link } from "react-router";
 import { posts } from "../data/posts";
+import { useMeta } from "../hooks/use-meta";
 
 export function Blog() {
+  useMeta({
+    title: "Blog",
+    description: "Articles about programming, Linux, and other things.",
+    ogImage: "/og-image.png",
+    url: "/blog",
+  });
+
   return (
     <div className="max-w-4xl mx-auto px-6 md:px-12 py-12">
       <h1 className="font-['IBM_Plex_Mono'] text-3xl md:text-4xl mb-8">

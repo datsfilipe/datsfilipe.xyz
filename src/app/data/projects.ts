@@ -5,7 +5,7 @@ export interface Project {
   date: string;
   file: string;
   media?: {
-    type: "image" | "video";
+    type: "image" | "video" | "cast";
     url: string;
     caption?: string;
   }[];
@@ -20,9 +20,9 @@ export const projects: Project[] = [
     file: "trxsh.md",
     media: [
       {
-        type: "image",
-        url: "https://images.unsplash.com/photo-1629654297299-c8506221ca97?w=800&h=500&fit=crop",
-        caption: "Terminal-based workflow",
+        type: "cast",
+        url: "/projects/trxsh-demo.cast",
+        caption: "Trxsh in action",
       },
     ],
   },
@@ -39,6 +39,13 @@ export const projects: Project[] = [
     version: "5ea4ec6 (fork)",
     date: "2026-03-07",
     file: "zellij-switch.md",
+    media: [
+      {
+        type: "cast",
+        url: "/projects/zellij-switch-demo.cast",
+        caption: "Switching sessions with Zellij Switch",
+      },
+    ],
   },
   {
     id: "vesper-nvim",
@@ -49,8 +56,8 @@ export const projects: Project[] = [
     media: [
       {
         type: "image",
-        url: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=500&fit=crop",
-        caption: "Code editor theme preview",
+        url: "/projects/vesper-nvim-preview.png",
+        caption: "Vesper color scheme in Neovim",
       },
     ],
   },

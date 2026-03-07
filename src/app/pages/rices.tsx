@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useMeta } from "../hooks/use-meta";
 
 interface Rice {
   id: string;
@@ -9,6 +10,13 @@ interface Rice {
 }
 
 export function Rices() {
+  useMeta({
+    title: "Rices",
+    description: "Linux desktop customization gallery.",
+    ogImage: "/og-image.png",
+    url: "/rices",
+  });
+
   const [rices, setRices] = useState<Rice[]>([]);
 
   useEffect(() => {

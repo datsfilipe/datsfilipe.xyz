@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useParams, Link, Navigate, useSearchParams } from "react-router";
 import { projects } from "../data/projects";
 import { MarkdownContent } from "../components/markdown-content";
+import { AsciinemaPlayer } from "../components/asciinema-player";
+import { useMeta } from "../hooks/use-meta";
 
 export function ProjectPost() {
   const { projectId } = useParams<{ projectId: string }>();
@@ -17,6 +19,12 @@ export function ProjectPost() {
       .then((text) => setContent(text))
       .catch(() => setContent("Failed to load project content."));
   }, [project]);
+
+  useMeta({
+    title: project?.title ?? "Project not found",
+    ogImage: project ? `/og/projects/${project.id}.png` : undefined,
+    url: project ? `/projects/${project.id}` : undefined,
+  });
 
   if (!project) {
     return <Navigate to="/404" replace />;
@@ -53,7 +61,9 @@ export function ProjectPost() {
                 key={index}
                 className="overflow-hidden border border-[var(--border)]"
               >
-                {item.type === "image" ? (
+                {item.type === "cast" ? (
+                  <AsciinemaPlayer src={item.url} />
+                ) : item.type === "image" ? (
                   <img
                     src={item.url}
                     alt={item.caption || `Project media ${index + 1}`}

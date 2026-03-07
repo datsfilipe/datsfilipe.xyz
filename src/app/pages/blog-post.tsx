@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, Link, Navigate, useSearchParams } from "react-router";
 import { posts } from "../data/posts";
 import { MarkdownContent } from "../components/markdown-content";
+import { useMeta } from "../hooks/use-meta";
 
 function stripFrontmatter(content: string): string {
   const match = content.match(/^---\s*\n[\s\S]*?\n---\s*\n([\s\S]*)$/);
@@ -22,6 +23,12 @@ export function BlogPost() {
       .then((text) => setContent(stripFrontmatter(text)))
       .catch(() => setContent("Failed to load post content."));
   }, [post]);
+
+  useMeta({
+    title: post?.title ?? "Post not found",
+    ogImage: post ? `/og/blog/${post.id}.png` : undefined,
+    url: post ? `/blog/${post.id}` : undefined,
+  });
 
   if (!post) {
     return <Navigate to="/404" replace />;
@@ -47,6 +54,12 @@ export function BlogPost() {
           </h1>
           <time className="text-sm text-[var(--muted)]">{post.date}</time>
         </div>
+
+        {post.cover && (
+          <div className="mb-8 overflow-hidden border border-[var(--border)]">
+            <img src={post.cover} alt={post.title} className="w-full" />
+          </div>
+        )}
 
         {content === null ? (
           <p className="text-[var(--muted)]">Loading...</p>
