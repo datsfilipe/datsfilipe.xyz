@@ -1,5 +1,5 @@
 /node_modules
-/build
+/dist
 
 .DS_Store
 
@@ -12,6 +12,3 @@
 .env.production.local
 
 .direnv
-public/_app
-.dist
-/server

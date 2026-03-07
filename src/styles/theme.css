@@ -1,0 +1,116 @@
+:root {
+  --font-size: 16px;
+
+  --color-lightest: #e8e8e8;
+  --color-light: #b7b7b7;
+  --color-medium: #8c8c8c;
+  --color-dark: #525252;
+  --color-darkest: #181818;
+  --color-accent: #3e6cef;
+
+  /* Dark mode (default) */
+  --background: #181818;
+  --foreground: #e8e8e8;
+  --border: #525252;
+  --muted: #8c8c8c;
+  --card: #181818;
+  --card-foreground: #e8e8e8;
+  --popover: #1e1e1e;
+  --popover-foreground: #e8e8e8;
+  --accent: #3e6cef;
+  --destructive: #d4183d;
+
+  --notebook-line: rgba(82, 82, 82, 0.4);
+  --notebook-margin: #3d1a24;
+  --border-strong: #333333;
+  --hover-bg: rgba(255, 255, 255, 0.05);
+  --inline-code-bg: #2a2a2a;
+  --code-block-bg: #0d0d0d;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --background: #e8e8e8;
+    --foreground: #181818;
+    --border: #b7b7b7;
+    --muted: #525252;
+    --card: #ffffff;
+    --card-foreground: #181818;
+    --popover: #ffffff;
+    --popover-foreground: #181818;
+    --accent: #3e6cef;
+    --destructive: #d4183d;
+
+    --notebook-line: rgba(183, 183, 183, 0.4);
+    --notebook-margin: #c9a0aa;
+    --border-strong: #aaaaaa;
+    --hover-bg: rgba(255, 255, 255, 0.5);
+    --inline-code-bg: #f3f3f5;
+    --code-block-bg: #1e1e1e;
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-border: var(--border);
+  --color-muted: var(--muted);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-accent: var(--accent);
+  --color-destructive: var(--destructive);
+}
+
+.notebook-line {
+  border-bottom: 1px solid var(--border);
+}
+
+.full-bleed-lines {
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  padding-left: calc(50vw - 50%);
+  padding-right: calc(50vw - 50%);
+}
+
+.full-bleed-lines > .notebook-line {
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  padding-left: calc(50vw - 50%);
+  padding-right: calc(50vw - 50%);
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  html {
+    font-size: var(--font-size);
+    scroll-behavior: smooth;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  h1 {
+    font-size: var(--text-2xl);
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  h2 {
+    font-size: var(--text-xl);
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  h3 {
+    font-size: var(--text-lg);
+    font-weight: 500;
+    line-height: 1.5;
+  }
+}

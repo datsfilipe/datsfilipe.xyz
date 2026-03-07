@@ -1,6 +1,3 @@
-[submodule "public/notes"]
-	path = public/notes
-	url = git@github.com:datsfilipe/shareable-notes.git
 [submodule "public/blog"]
 	path = public/blog
 	url = git@github.com:datsfilipe/shareable-posts.git
