@@ -5,26 +5,22 @@ import { projects } from './src/app/data/projects';
 const SITE = 'https://datsfilipe.xyz';
 
 function generateSitemap(): string {
-  const urls: { loc: string; priority: string }[] = [
-    { loc: '/', priority: '1.0' },
-    { loc: '/blog', priority: '0.8' },
-    { loc: '/projects', priority: '0.8' },
-    { loc: '/rices', priority: '0.7' },
-  ];
+  const today = new Date().toISOString().split('T')[0];
+  const urls: string[] = ['/', '/blog', '/projects', '/rices'];
 
   for (const post of posts) {
-    urls.push({ loc: `/blog/${post.id}`, priority: '0.6' });
+    urls.push(`/blog/${post.id}`);
   }
 
   for (const project of projects) {
-    urls.push({ loc: `/projects/${project.id}`, priority: '0.6' });
+    urls.push(`/projects/${project.id}`);
   }
 
   const entries = urls
     .map(
       (u) => `  <url>
-    <loc>${SITE}${u.loc}</loc>
-    <priority>${u.priority}</priority>
+    <loc>${SITE}${u}</loc>
+    <lastmod>${today}</lastmod>
   </url>`,
     )
     .join('\n');
