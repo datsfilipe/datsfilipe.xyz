@@ -8,6 +8,7 @@
       "src": "/(.*\\.(js|css|html|png|jpg|jpeg|gif|svg|webp|mp4|webm|woff|woff2|ttf|otf|eot|ico|xml|txt|pdf|zip|rar|json|webmanifest|cast))$",
       "continue": true
     },
-    { "src": "/(.*)", "dest": "/api/ssr" }
+    { "src": "/[^.]+", "dest": "/api/ssr" },
+    { "src": "/", "dest": "/api/ssr" }
   ]
 }

@@ -1,6 +1,5 @@
 /node_modules
 /dist
-/api/ssr.js
 
 .DS_Store
 
