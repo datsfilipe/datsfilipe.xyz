@@ -30,12 +30,11 @@ export function Rices() {
     <div className="max-w-6xl mx-auto px-6 md:px-12 py-12">
       <div className="mb-12">
         <h1 className="font-['IBM_Plex_Mono'] text-3xl md:text-4xl mb-3">Rices</h1>
-        <p className="font-mono text-sm text-[var(--muted)]">unix desktop customization</p>
-        <p className="font-mono text-sm mt-2">
-          One of my hobbies has always been customizing my desktop environment and, throughout the
-          years, I've kept a bunch of these registered. I used to have an account on "r/unixporn"
-          and most of those were posted there initially, but since I've deleted my reddit account,
-          this now is the only place to find them.
+        <p className="font-mono text-sm text-[var(--muted)] mb-2">Unix desktop customization</p>
+        <p className="text-sm mt-2">
+          I collect and showcase Unix desktop setups I've built over the years. I used to post many
+          of them to r/unixporn on Reddit, but after deleting my account they're now only available
+          here.
         </p>
       </div>
 
