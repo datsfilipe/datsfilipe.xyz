@@ -24,11 +24,7 @@ export function BlogPost() {
       .catch(() => setContent('Failed to load post content.'));
   }, [post]);
 
-  useMeta({
-    title: post?.title ?? 'Post not found',
-    ogImage: post ? `/og/blog/${post.id}.png` : undefined,
-    url: post ? `/blog/${post.id}` : undefined,
-  });
+  useMeta(post?.title ?? 'Post not found');
 
   if (!post) {
     return <Navigate to="/404" replace />;

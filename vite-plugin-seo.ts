@@ -34,6 +34,7 @@ ${entries}
 function generateRobots(): string {
   return `User-agent: *
 Allow: /
+Allow: /api/og/*
 
 Sitemap: ${SITE}/sitemap.xml
 `;

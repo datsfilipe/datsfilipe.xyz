@@ -10,6 +10,7 @@
     "format": "prettier --config .prettierrc --ignore-path .prettierignore --write ."
   },
   "dependencies": {
+    "@vercel/og": "^0.11.1",
     "asciinema-player": "^3.15.1",
     "highlight.js": "^11.11.1",
     "react": "^19.2.4",
@@ -21,7 +22,6 @@
     "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
-    "@resvg/resvg-js": "^2.6.2",
     "@tailwindcss/vite": "^4.2.1",
     "@types/node": "^25.3.5",
     "@types/react": "^19.2.14",

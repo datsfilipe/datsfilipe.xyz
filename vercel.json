@@ -2,5 +2,12 @@
   "installCommand": "git config submodule.public/blog.url https://github.com/datsfilipe/shareable-posts.git && git submodule update --init --recursive && bun install",
   "buildCommand": "bun run build",
   "outputDirectory": "dist",
-  "rewrites": [{ "source": "/((?!.*\\.).*)", "destination": "/index.html" }]
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/api/$1" },
+    {
+      "src": "/(.*\\.(js|css|png|jpg|jpeg|gif|svg|webp|mp4|webm|woff|woff2|ttf|otf|eot|ico|xml|txt|pdf|zip|rar|json|webmanifest|cast))$",
+      "continue": true
+    },
+    { "src": "/(.*)", "dest": "/api/ssr" }
+  ]
 }

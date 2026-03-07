@@ -7,12 +7,7 @@ import { projects } from '../data/projects';
 import { useMeta } from '../hooks/use-meta';
 
 export function Home() {
-  useMeta({
-    title: 'datsfilipe',
-    description: 'Filipe Lima — full-stack developer. Blog, projects, and rices.',
-    ogImage: '/og-image.png',
-    url: '/',
-  });
+  useMeta('datsfilipe');
   const latestPosts = posts.slice(0, 4);
   const displayProjects = projects;
 

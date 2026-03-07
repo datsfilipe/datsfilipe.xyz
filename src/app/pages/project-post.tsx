@@ -20,11 +20,7 @@ export function ProjectPost() {
       .catch(() => setContent('Failed to load project content.'));
   }, [project]);
 
-  useMeta({
-    title: project?.title ?? 'Project not found',
-    ogImage: project ? `/og/projects/${project.id}.png` : undefined,
-    url: project ? `/projects/${project.id}` : undefined,
-  });
+  useMeta(project?.title ?? 'Project not found');
 
   if (!project) {
     return <Navigate to="/404" replace />;

@@ -10,12 +10,7 @@ interface Rice {
 }
 
 export function Rices() {
-  useMeta({
-    title: 'Rices',
-    description: 'Linux desktop customization gallery.',
-    ogImage: '/og-image.png',
-    url: '/rices',
-  });
+  useMeta('Rices');
 
   const [rices, setRices] = useState<Rice[]>([]);
 

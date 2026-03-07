@@ -3,12 +3,7 @@ import { posts } from '../data/posts';
 import { useMeta } from '../hooks/use-meta';
 
 export function Blog() {
-  useMeta({
-    title: 'Blog',
-    description: 'Articles about programming, Linux, and other things.',
-    ogImage: '/og-image.png',
-    url: '/blog',
-  });
+  useMeta('Blog');
 
   return (
     <div className="max-w-4xl mx-auto px-6 md:px-12 py-12">

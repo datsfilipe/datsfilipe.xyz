@@ -1,0 +1,16 @@
+{
+  "posts": {
+    "my-development-environment": { "title": "My Development Environment", "date": "2023-11-27" },
+    "why-arent-you-using-astro": { "title": "Why aren't you using Astro?", "date": "2023-08-17" }
+  },
+  "projects": {
+    "trxsh": { "title": "Trxsh", "version": "v1.1.0", "date": "2026-03-07" },
+    "nix-envs": { "title": "nix-envs", "version": "ddd37af", "date": "2026-03-07" },
+    "zellij-switch": {
+      "title": "Zellij Switch",
+      "version": "5ea4ec6 (fork)",
+      "date": "2026-03-07"
+    },
+    "vesper-nvim": { "title": "Vesper.nvim", "version": "1717b1a", "date": "2026-03-07" }
+  }
+}
