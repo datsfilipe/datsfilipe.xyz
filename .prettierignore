@@ -5,3 +5,4 @@ public/_app
 *.min.js
 *.min.css
 bun.lock
+public/blog

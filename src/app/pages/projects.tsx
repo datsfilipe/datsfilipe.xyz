@@ -1,20 +1,18 @@
-import { Link } from "react-router";
-import { projects } from "../data/projects";
-import { useMeta } from "../hooks/use-meta";
+import { Link } from 'react-router';
+import { projects } from '../data/projects';
+import { useMeta } from '../hooks/use-meta';
 
 export function Projects() {
   useMeta({
-    title: "Projects",
-    description: "Active open-source projects by Filipe Lima.",
-    ogImage: "/og-image.png",
-    url: "/projects",
+    title: 'Projects',
+    description: 'Active open-source projects by Filipe Lima.',
+    ogImage: '/og-image.png',
+    url: '/projects',
   });
 
   return (
     <div className="max-w-4xl mx-auto px-6 md:px-12 py-12">
-      <h1 className="font-['IBM_Plex_Mono'] text-3xl md:text-4xl mb-8">
-        Projects
-      </h1>
+      <h1 className="font-['IBM_Plex_Mono'] text-3xl md:text-4xl mb-8">Projects</h1>
 
       <div className="full-bleed-lines">
         {projects.map((project) => (

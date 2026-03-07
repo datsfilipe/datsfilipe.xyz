@@ -1,15 +1,15 @@
-import type { Plugin } from "vite";
-import { readFileSync } from "fs";
-import { resolve } from "path";
-import { posts } from "./src/app/data/posts";
+import { readFileSync } from 'fs';
+import { resolve } from 'path';
+import type { Plugin } from 'vite';
+import { posts } from './src/app/data/posts';
 
 function escapeXml(str: string): string {
   return str
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&apos;");
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;');
 }
 
 function stripFrontmatter(content: string): string {
@@ -23,19 +23,15 @@ function generateRssXml(): string {
   );
 
   const items = sortedPosts.map((post) => {
-    let body = "";
+    let body = '';
     try {
-      const raw = readFileSync(
-        resolve(__dirname, "public/blog", post.file),
-        "utf-8",
-      );
+      const raw = readFileSync(resolve(__dirname, 'public/blog', post.file), 'utf-8');
       body = stripFrontmatter(raw);
     } catch {
-      body = "";
+      body = '';
     }
 
-    const description =
-      body.slice(0, 200).replace(/\n/g, " ").trim() + "...";
+    const description = body.slice(0, 200).replace(/\n/g, ' ').trim() + '...';
 
     return `
     <item>
@@ -56,24 +52,24 @@ function generateRssXml(): string {
     <description>Thoughts and articles about programming, linux and other things</description>
     <language>en</language>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
-    <atom:link href="https://datsfilipe.xyz/rss.xml" rel="self" type="application/rss+xml" />${items.join("")}
+    <atom:link href="https://datsfilipe.xyz/rss.xml" rel="self" type="application/rss+xml" />${items.join('')}
   </channel>
 </rss>`;
 }
 
 export function rssPlugin(): Plugin {
   return {
-    name: "vite-plugin-rss",
+    name: 'vite-plugin-rss',
     generateBundle() {
       this.emitFile({
-        type: "asset",
-        fileName: "rss.xml",
+        type: 'asset',
+        fileName: 'rss.xml',
         source: generateRssXml(),
       });
     },
     configureServer(server) {
-      server.middlewares.use("/rss.xml", (_req, res) => {
-        res.setHeader("Content-Type", "application/xml");
+      server.middlewares.use('/rss.xml', (_req, res) => {
+        res.setHeader('Content-Type', 'application/xml');
         res.end(generateRssXml());
       });
     },

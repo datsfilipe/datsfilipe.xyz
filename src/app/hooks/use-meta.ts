@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
 interface MetaOptions {
   title: string;
@@ -13,38 +13,36 @@ function setMeta(property: string, content: string) {
     el = document.querySelector(`meta[name="${property}"]`);
   }
   if (el) {
-    el.setAttribute("content", content);
+    el.setAttribute('content', content);
   }
 }
 
 export function useMeta({ title, description, ogImage, url }: MetaOptions) {
   useEffect(() => {
-    const fullTitle = title === "datsfilipe" ? title : `${title} — datsfilipe`;
+    const fullTitle = title === 'datsfilipe' ? title : `${title} — datsfilipe`;
     document.title = fullTitle;
 
-    setMeta("og:title", title);
-    setMeta("twitter:title", title);
+    setMeta('og:title', title);
+    setMeta('twitter:title', title);
 
     if (description) {
-      setMeta("description", description);
-      setMeta("og:description", description);
-      setMeta("twitter:description", description);
+      setMeta('description', description);
+      setMeta('og:description', description);
+      setMeta('twitter:description', description);
     }
 
     if (ogImage) {
-      const src = ogImage.startsWith("http")
-        ? ogImage
-        : `https://datsfilipe.xyz${ogImage}`;
-      setMeta("og:image", src);
-      setMeta("twitter:image", src);
+      const src = ogImage.startsWith('http') ? ogImage : `https://datsfilipe.xyz${ogImage}`;
+      setMeta('og:image', src);
+      setMeta('twitter:image', src);
     }
 
     if (url) {
-      setMeta("og:url", `https://datsfilipe.xyz${url}`);
+      setMeta('og:url', `https://datsfilipe.xyz${url}`);
     }
 
     return () => {
-      document.title = "datsfilipe";
+      document.title = 'datsfilipe';
     };
   }, [title, description, ogImage, url]);
 }

@@ -1,5 +1,5 @@
-import { useState, useRef, MouseEvent } from "react";
-import { createPortal } from "react-dom";
+import { MouseEvent, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 
 export function RicingTooltip() {
   const [isVisible, setIsVisible] = useState(false);
@@ -45,12 +45,11 @@ export function RicingTooltip() {
             style={{
               left: `${position.x}px`,
               top: `${position.y}px`,
-              transform: "translateX(-50%)",
+              transform: 'translateX(-50%)',
             }}
           >
-            "Ricing" is the process of customizing a desktop
-            environment — window managers, color schemes, status bars,
-            terminals — to be both functional and visually unique.
+            "Ricing" is the process of customizing a desktop environment — window managers, color
+            schemes, status bars, terminals — to be both functional and visually unique.
           </span>,
           document.body,
         )}

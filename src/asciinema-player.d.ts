@@ -1,4 +1,4 @@
-declare module "asciinema-player" {
+declare module 'asciinema-player' {
   export function create(
     src: string,
     element: HTMLElement,
@@ -6,4 +6,4 @@ declare module "asciinema-player" {
   ): { dispose: () => void };
 }
 
-declare module "asciinema-player/dist/bundle/asciinema-player.css";
+declare module 'asciinema-player/dist/bundle/asciinema-player.css';

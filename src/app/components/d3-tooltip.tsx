@@ -1,5 +1,5 @@
-import { useState, useRef, MouseEvent } from "react";
-import { createPortal } from "react-dom";
+import { MouseEvent, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 
 interface D3TooltipProps {
   children: React.ReactNode;
@@ -49,7 +49,7 @@ export function D3Tooltip({ children }: D3TooltipProps) {
             style={{
               left: `${position.x}px`,
               top: `${position.y}px`,
-              transform: "translateX(-50%)",
+              transform: 'translateX(-50%)',
             }}
           >
             {children}

@@ -1,4 +1,4 @@
-import { useState, useRef, MouseEvent } from "react";
+import { MouseEvent, useRef, useState } from 'react';
 
 interface NFTCardProps {
   imageUrl: string;
@@ -7,7 +7,7 @@ interface NFTCardProps {
   className?: string;
 }
 
-export function NFTCard({ imageUrl, title, link, className = "" }: NFTCardProps) {
+export function NFTCard({ imageUrl, title, link, className = '' }: NFTCardProps) {
   const [, setIsHovered] = useState(false);
   const cardRef = useRef<HTMLAnchorElement>(null);
 
@@ -56,7 +56,7 @@ export function NFTCard({ imageUrl, title, link, className = "" }: NFTCardProps)
         target="_blank"
         rel="noopener noreferrer"
         className="block transition-transform duration-200 ease-out"
-        style={{ transformStyle: "preserve-3d" }}
+        style={{ transformStyle: 'preserve-3d' }}
         onMouseMove={handleMouseMove}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -66,8 +66,8 @@ export function NFTCard({ imageUrl, title, link, className = "" }: NFTCardProps)
           alt={title}
           className="w-full rounded-2xl shadow-lg"
           style={{
-            transformStyle: "preserve-3d",
-            backfaceVisibility: "hidden",
+            transformStyle: 'preserve-3d',
+            backfaceVisibility: 'hidden',
           }}
         />
       </a>

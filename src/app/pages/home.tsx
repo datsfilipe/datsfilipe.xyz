@@ -1,17 +1,17 @@
-import { Link } from "react-router";
-import { NFTCard } from "../components/nft-card";
-import { D3Tooltip } from "../components/d3-tooltip";
-import { RicingTooltip } from "../components/ricing-tooltip";
-import { posts } from "../data/posts";
-import { projects } from "../data/projects";
-import { useMeta } from "../hooks/use-meta";
+import { Link } from 'react-router';
+import { D3Tooltip } from '../components/d3-tooltip';
+import { NFTCard } from '../components/nft-card';
+import { RicingTooltip } from '../components/ricing-tooltip';
+import { posts } from '../data/posts';
+import { projects } from '../data/projects';
+import { useMeta } from '../hooks/use-meta';
 
 export function Home() {
   useMeta({
-    title: "datsfilipe",
-    description: "Filipe Lima — full-stack developer. Blog, projects, and rices.",
-    ogImage: "/og-image.png",
-    url: "/",
+    title: 'datsfilipe',
+    description: 'Filipe Lima — full-stack developer. Blog, projects, and rices.',
+    ogImage: '/og-image.png',
+    url: '/',
   });
   const latestPosts = posts.slice(0, 4);
   const displayProjects = projects;
@@ -20,23 +20,20 @@ export function Home() {
     <div className="max-w-6xl mx-auto px-6 md:px-12 py-12">
       <section className="grid md:grid-cols-[1fr_300px] gap-12 mb-16">
         <div>
-          <h1 className="font-['IBM_Plex_Mono'] text-3xl md:text-4xl mb-6">
-            Filipe Lima
-          </h1>
+          <h1 className="font-['IBM_Plex_Mono'] text-3xl md:text-4xl mb-6">Filipe Lima</h1>
           <div className="text-base md:text-lg leading-relaxed space-y-4">
             <p>
-              23-year-old full-stack developer at{" "}
+              23-year-old full-stack developer at{' '}
               <D3Tooltip>
-                The world's first blockchain to tokenize internet domains,
-                bridging Web2 domains and Web3 ecosystems.
+                The world's first blockchain to tokenize internet domains, bridging Web2 domains and
+                Web3 ecosystems.
               </D3Tooltip>
-              , specializing in modern web applications with JavaScript and
-              TypeScript. Pursuing a Bachelor's degree in Computer Science
-              (2023–2026). Outside work I{" "}
-              <RicingTooltip />, solve Sudoku, and watch anime.
+              , specializing in modern web applications with JavaScript and TypeScript. Pursuing a
+              Bachelor's degree in Computer Science (2023–2026). Outside work I <RicingTooltip />,
+              solve Sudoku, and watch anime.
             </p>
             <p className="text-sm text-[var(--muted)]">
-              Reach me at{" "}
+              Reach me at{' '}
               <a
                 href="mailto:contact@datsfilipe.xyz"
                 className="text-[var(--accent)] hover:underline"
@@ -72,9 +69,7 @@ export function Home() {
             />
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-sm text-[var(--muted)]">
-              datsfilipe.xyz NFT (ERC-721)
-            </p>
+            <p className="text-sm text-[var(--muted)]">datsfilipe.xyz NFT (ERC-721)</p>
           </div>
         </a>
       </section>
@@ -82,10 +77,7 @@ export function Home() {
       <section className="mb-16">
         <div className="flex justify-between items-center mb-6">
           <h2 className="font-['IBM_Plex_Mono'] text-2xl">Latest Posts</h2>
-          <Link
-            to="/blog"
-            className="text-sm text-[var(--accent)] hover:underline"
-          >
+          <Link to="/blog" className="text-sm text-[var(--accent)] hover:underline">
             show more
           </Link>
         </div>
@@ -110,10 +102,7 @@ export function Home() {
       <section id="projects" className="mb-16 scroll-mt-20">
         <div className="flex justify-between items-center mb-6">
           <h2 className="font-['IBM_Plex_Mono'] text-2xl">Active Projects</h2>
-          <Link
-            to="/projects"
-            className="text-sm text-[var(--accent)] hover:underline"
-          >
+          <Link to="/projects" className="text-sm text-[var(--accent)] hover:underline">
             show more
           </Link>
         </div>
