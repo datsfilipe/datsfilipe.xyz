@@ -1,0 +1,5 @@
+{
+  "installCommand": "git config submodule.public/blog.url https://github.com/datsfilipe/shareable-posts.git && git submodule update --init --recursive && bun install",
+  "buildCommand": "bun run build",
+  "outputDirectory": "dist"
+}

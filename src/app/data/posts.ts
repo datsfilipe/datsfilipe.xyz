@@ -18,6 +18,6 @@ export const posts: Post[] = [
     title: "Why aren't you using Astro?",
     date: "2023-08-17",
     file: "why_arent_you_using_astro.md",
-    cover: "/blog/astro-cover.png",
+    cover: "/astro-cover.png",
   },
 ];
