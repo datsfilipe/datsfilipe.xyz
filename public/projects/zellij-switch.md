@@ -6,19 +6,7 @@ This fork makes the plugin track active sessions and enforce alphabetical orderi
 
 ## Usage
 
-The plugin is invoked through Zellij's pipe mechanism:
-
-```bash
-zellij pipe --plugin https://github.com/mostafaqanbaryan/zellij-switch/releases/download/0.2.1/zellij-switch.wasm -- "--session zellij-session --cwd /home --layout default"
-```
-
-### Parameters
-
-- `-s|--session` — target session name (supports spaces as of v0.2.1)
-- `-c|--cwd` — absolute path to set as working directory (optional)
-- `-l|--layout` — Zellij layout to use (optional)
-
-## Sessionizer Setup Guide
+Sessionsizer basic setup guide.
 
 ### Plugin Configuration
 
@@ -66,13 +54,19 @@ The plugin sorts sessions alphabetically, but prepending a timestamp ensures cre
 
 ### Window Manager Integration
 
-For opening the terminal together with a default session (e.g. via your WM keymap):
+For opening the terminal together with a default session (e.g. via Niri keymap):
 
 ```bash
 Mod+Return {
   spawn "bash" "-c" "t='dtsf'; s=$(zellij ls -s 2>/dev/null | grep -E \"(-|^)${t}$\" | sort | head -n1); if [ -n \"$s\" ]; then alacritty -e zellij attach \"$s\"; else alacritty -e zellij attach -c \"$(date +%s)-$t\"; fi"
 }
 ```
+
+### Parameters
+
+- `-s|--session` — target session name (supports spaces as of v0.2.1)
+- `-c|--cwd` — absolute path to set as working directory (optional)
+- `-l|--layout` — Zellij layout to use (optional)
 
 ## Building from Source
 
@@ -88,7 +82,7 @@ Add the flake as an input and use the provided overlay:
 
 ```nix
 {
-  inputs.zellij-switch.url = "github:mostafaqanbaryan/zellij-switch";
+  inputs.zellij-switch.url = "github:datsfilipe/zellij-switch";
   nixpkgs.overlays = [ zellij-switch.overlays.default ];
 }
 ```
