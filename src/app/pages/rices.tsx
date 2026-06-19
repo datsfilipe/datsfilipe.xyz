@@ -16,6 +16,7 @@ export function Rices() {
 
   const [rices, setRices] = useState<Rice[]>([]);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const [interacted, setInteracted] = useState(false);
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [searchParams] = useSearchParams();
   const activeFromUrl = searchParams.get('rice');
@@ -35,8 +36,7 @@ export function Rices() {
       ?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }, [activeFromUrl, rices]);
 
-  // Hover wins while the pointer is over a card; otherwise the URL link decides.
-  const openId = hoveredId ?? activeFromUrl;
+  const openId = interacted ? hoveredId : (hoveredId ?? activeFromUrl);
 
   async function shareRice(rice: Rice) {
     const url = `${window.location.origin}/rices?rice=${rice.id}`;
@@ -86,7 +86,10 @@ export function Rices() {
                 key={rice.id}
                 id={`rice-${rice.id}`}
                 className="relative"
-                onMouseEnter={() => setHoveredId(rice.id)}
+                onMouseEnter={() => {
+                  setInteracted(true);
+                  setHoveredId(rice.id);
+                }}
                 onMouseLeave={() => setHoveredId((h) => (h === rice.id ? null : h))}
               >
                 {/* Collapsed card — defines the grid cell */}
