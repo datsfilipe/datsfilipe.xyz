@@ -19,6 +19,7 @@
   --popover-foreground: #e8e8e8;
   --accent: #3e6cef;
   --destructive: #d4183d;
+  --success: #3fb950;
 
   --notebook-line: rgba(82, 82, 82, 0.4);
   --notebook-margin: #3d1a24;
@@ -40,6 +41,7 @@
     --popover-foreground: #181818;
     --accent: #3e6cef;
     --destructive: #d4183d;
+    --success: #2da44e;
 
     --notebook-line: rgba(183, 183, 183, 0.4);
     --notebook-margin: #c9a0aa;

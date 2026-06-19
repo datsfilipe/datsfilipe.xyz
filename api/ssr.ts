@@ -56,10 +56,45 @@ async function getMetadata(origin: string) {
   }
 }
 
+interface RiceMeta {
+  id: string;
+  title: string;
+  subtitle: string;
+  file: string;
+  fullImage?: string;
+}
+
+async function getRicesMetadata(origin: string): Promise<RiceMeta[]> {
+  try {
+    const res = await fetch(`${origin}/rices/metadata.json`);
+    return (await res.json()) as RiceMeta[];
+  } catch {
+    return [];
+  }
+}
+
 function getMetaForPath(
   pathname: string,
+  searchParams: URLSearchParams,
   metadata: Awaited<ReturnType<typeof getMetadata>>,
+  rices: RiceMeta[],
 ): PageMeta {
+  // A shared rice link (/rices?rice=<id>) previews the rice screenshot itself.
+  if (pathname === '/rices') {
+    const riceId = searchParams.get('rice');
+    if (riceId) {
+      const rice = rices.find((r) => r.id === riceId);
+      if (rice) {
+        return {
+          title: `${rice.title} — datsfilipe`,
+          description: rice.subtitle,
+          image: `${SITE}/rices/${rice.file}`,
+          url: `${SITE}/rices?rice=${rice.id}`,
+        };
+      }
+    }
+  }
+
   if (STATIC_PAGES[pathname]) return STATIC_PAGES[pathname];
 
   const blogMatch = pathname.match(/^\/blog\/([^/]+)$/);
@@ -95,13 +130,14 @@ export default async function handler(req: Request) {
   const url = new URL(req.url);
   const origin = url.origin;
 
-  const [htmlRes, metadata] = await Promise.all([
+  const [htmlRes, metadata, rices] = await Promise.all([
     fetch(`${origin}/index.html`),
     getMetadata(origin),
+    getRicesMetadata(origin),
   ]);
 
   let html = await htmlRes.text();
-  const meta = getMetaForPath(url.pathname, metadata);
+  const meta = getMetaForPath(url.pathname, url.searchParams, metadata, rices);
 
   html = html
     .replace(/__OG_TITLE__/g, meta.title)
