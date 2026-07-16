@@ -1,11 +1,19 @@
 import { useState } from 'react';
 import { Link, Outlet, useLocation } from 'react-router';
 
-const navLinks = [
+type NavLink = {
+  to: string;
+  label: string;
+  match?: (p: string) => boolean;
+  external?: boolean;
+};
+
+const navLinks: NavLink[] = [
   { to: '/', label: 'Home', match: (p: string) => p === '/' },
   { to: '/blog', label: 'Blog', match: (p: string) => p.startsWith('/blog') },
   { to: '/projects', label: 'Projects', match: (p: string) => p.startsWith('/projects') },
   { to: '/rices', label: 'Rices', match: (p: string) => p === '/rices' },
+  { to: '/cv/FILIPE_LIMA-EN.pdf', label: 'CV', external: true },
 ];
 
 export function Layout() {
@@ -23,15 +31,27 @@ export function Layout() {
             datsfilipe
           </Link>
           <div className="hidden md:flex gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                className={`hover:text-[var(--accent)] transition-colors ${link.match(location.pathname) ? 'text-[var(--accent)]' : ''}`}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) =>
+              link.external ? (
+                <a
+                  key={link.to}
+                  href={link.to}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[var(--accent)] transition-colors"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className={`hover:text-[var(--accent)] transition-colors ${link.match?.(location.pathname) ? 'text-[var(--accent)]' : ''}`}
+                >
+                  {link.label}
+                </Link>
+              ),
+            )}
           </div>
           <button
             className="md:hidden"
@@ -62,16 +82,29 @@ export function Layout() {
         </div>
         {menuOpen && (
           <div className="md:hidden border-t border-[var(--border)] px-6 py-4 flex flex-col gap-4">
-            {navLinks.map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                onClick={() => setMenuOpen(false)}
-                className={`hover:text-[var(--accent)] transition-colors ${link.match(location.pathname) ? 'text-[var(--accent)]' : ''}`}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) =>
+              link.external ? (
+                <a
+                  key={link.to}
+                  href={link.to}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setMenuOpen(false)}
+                  className="hover:text-[var(--accent)] transition-colors"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  onClick={() => setMenuOpen(false)}
+                  className={`hover:text-[var(--accent)] transition-colors ${link.match?.(location.pathname) ? 'text-[var(--accent)]' : ''}`}
+                >
+                  {link.label}
+                </Link>
+              ),
+            )}
           </div>
         )}
       </nav>
