@@ -24,7 +24,7 @@ export function Home() {
                 Web3 ecosystems.
               </D3Tooltip>
               , experienced in building modern web applications with JavaScript and TypeScript.
-              Pursuing a Bachelor's degree in Computer Science (2023–2026). Outside work I{' '}
+              Pursuing a Bachelor's degree in Computer Science (2023–current). Outside work I{' '}
               <RicingTooltip />, solve Sudoku, and watch anime. I'm currently learning digital
               drawing and Japanese.
             </p>
