@@ -6,7 +6,7 @@
     <style>
       @page {
         size: letter;
-        margin: 0.55in 0.85in;
+        margin: 0.5in 0.85in;
       }
 
       * {
@@ -44,7 +44,7 @@
         font-size: 16px;
         font-weight: bold;
         letter-spacing: 0.5px;
-        margin: 22px 0 11px 0;
+        margin: 14px 0 7px 0;
       }
 
       .contact {
@@ -75,19 +75,30 @@
       .date {
         font-style: italic;
         color: #333;
-        margin: 0 0 6px 0;
+        margin: 0 0 3px 0;
+      }
+
+      .headline {
+        font-size: 15px;
+        color: #333;
+        margin: 0 0 8px 0;
       }
 
       .entry {
-        margin-bottom: 11px;
+        margin-bottom: 7px;
       }
 
-      .entry p.desc {
-        margin: 0;
+      ul.desc {
+        margin: 2px 0 0 0;
+        padding-left: 18px;
+      }
+
+      ul.desc li {
+        margin: 0 0 1px 0;
       }
 
       .edu {
-        margin-bottom: 11px;
+        margin-bottom: 8px;
       }
 
       .edu .school {
@@ -102,10 +113,16 @@
       .edu .date {
         margin: 0;
       }
+
+      .date-inline {
+        font-style: italic;
+        color: #333;
+      }
     </style>
   </head>
   <body>
     <h1>FILIPE LIMA</h1>
+    <p class="headline">Full-stack Software Engineer</p>
 
     <table class="contact">
       <tr>
@@ -124,9 +141,9 @@
 
     <h2>PERSONAL STATEMENT</h2>
     <p>
-      Software engineer with experience developing modern web applications using React and Node.js.
-      Enjoy solving complex problems, building reliable software, and continuously learning new
-      technologies.
+      Experienced in developing modern web applications that make it to production. A collaborative,
+      communicative teammate who works closely with clients and colleagues and takes ownership of
+      what gets built.
     </p>
 
     <h2>WORK EXPERIENCE</h2>
@@ -135,33 +152,43 @@
       <p class="role">Full Stack Developer</p>
       <p class="company"><a href="https://d3.com/">@D3</a></p>
       <p class="date">Sep/2025 - Present</p>
-      <p class="desc">
-        Develop full-stack web applications using NestJS, Node.js, TypeScript, and React, building
-        backend APIs and frontend features in a fully remote team. Promoted in recognition of
-        increased ownership and impact.
-      </p>
+      <ul class="desc">
+        <li>
+          Build full-stack web applications with NestJS, Node.js, TypeScript and React — backend
+          APIs and frontend interfaces alike.
+        </li>
+        <li>
+          Own features from design through delivery in a fully remote team; promoted from the Jr
+          role in recognition of increased scope and impact.
+        </li>
+      </ul>
     </div>
 
     <div class="entry">
       <p class="role">Jr Full Stack Engineer</p>
       <p class="company"><a href="https://d3.com/">@D3</a></p>
       <p class="date">Feb/2024 - Oct/2025</p>
-      <p class="desc">
-        Delivered production features across backend and frontend with NestJS, Node.js, TypeScript
-        and React, while ramping up on the codebase, testing practices and delivery workflow.
-      </p>
+      <ul class="desc">
+        <li>Shipped production features across both the backend and frontend.</li>
+        <li>Grew into the codebase, its testing practices and the team's delivery workflow.</li>
+      </ul>
     </div>
 
     <div class="entry">
       <p class="role">Frontend Developer</p>
       <p class="company">@Octaldev</p>
       <p class="date">Feb/2022 - Jan/2023</p>
-      <p class="desc">
-        Sole frontend developer responsible for designing and implementing interfaces for an
-        e-commerce platform, an admin portal, and a CMS. Built a shared component library and
-        internal boilerplates using TypeScript, React, Next.js, and Sass, collaborated with backend
-        engineers and clients on product decisions, and owned frontend unit test coverage.
-      </p>
+      <ul class="desc">
+        <li>
+          Sole frontend developer: designed and implemented the interfaces for an e-commerce
+          platform, an admin portal and a CMS with React, Next.js and Sass.
+        </li>
+        <li>Created a shared component library and internal boilerplates for the team.</li>
+        <li>
+          Partnered with backend engineers and clients on product decisions, and introduced the
+          project's first frontend unit tests.
+        </li>
+      </ul>
     </div>
 
     <div class="entry">
@@ -170,25 +197,25 @@
         <a href="https://github.com/datsfilipe">@Self employed</a>
       </p>
       <p class="date">Dec/2020 - Present</p>
-      <p class="desc">
-        Ongoing open-source work and developer tooling, such as
-        <a href="https://github.com/datsfilipe/trxsh">trxsh</a>, a CLI trash utility. Actively
-        contributing to open-source across TypeScript, Go, Rust and Lua, using modern technologies.
-      </p>
+      <ul class="desc">
+        <li>
+          Build and maintain small, focused, open-source projects, such as
+          <a href="https://github.com/datsfilipe/trxsh">trxsh</a>, a CLI trash utility.
+        </li>
+        <li>Contribute to open-source projects using TypeScript, Go, Rust and Lua.</li>
+      </ul>
     </div>
 
     <h2>EDUCATION</h2>
 
     <div class="edu">
       <p class="school">Wyden University | MA, Brazil</p>
-      <p>Bachelor of Computer Science</p>
-      <p class="date">Jan/2023 - Present</p>
+      <p>Bachelor of Computer Science <span class="date-inline">· Jan/2023 - Present</span></p>
     </div>
 
     <div class="edu" style="margin-bottom: 0">
       <p class="school">Federal Institute of Porto Franco | MA, Brazil</p>
-      <p>Technical course in IT</p>
-      <p class="date">Feb/2018 - Oct/2021</p>
+      <p>Technical course in IT <span class="date-inline">· Feb/2018 - Oct/2021</span></p>
     </div>
   </body>
 </html>
