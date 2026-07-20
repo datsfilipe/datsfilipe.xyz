@@ -13,7 +13,7 @@ export interface Post {
 export const posts: Post[] = [
   {
     id: 'dotfiles-interview-47',
-    title: 'Dotfiles Newsletter (47 - Filipe Lima)',
+    title: 'Dotfiles Newsletter by Adib Hanna (47 - Filipe Lima)',
     date: '2026-01-08',
     external: 'https://dotfiles.substack.com/p/47-filipe-lima',
     source: 'dotfiles.substack.com',
