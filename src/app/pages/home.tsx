@@ -36,6 +36,24 @@ export function Home() {
               >
                 contact@datsfilipe.xyz
               </a>
+              , or find me on{' '}
+              <a
+                href="https://github.com/datsfilipe"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[var(--accent)] hover:underline"
+              >
+                GitHub
+              </a>{' '}
+              and{' '}
+              <a
+                href="https://discord.com/users/1070825275350327346"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[var(--accent)] hover:underline"
+              >
+                Discord
+              </a>
               .
             </p>
           </div>
