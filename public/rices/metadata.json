@@ -112,11 +112,11 @@
     "fullImage": "bspwm_paradise.png"
   },
   {
-    "id": "gnome-paradise",
-    "title": "Gnome Paradise",
-    "subtitle": "Gnome paradise theme",
-    "file": "gnome_paradise.jpg",
-    "fullImage": "gnome_paradise.png"
+    "id": "first-bspwm-paradise",
+    "title": "First Bspwm Paradise",
+    "subtitle": "First bspwm paradise theme",
+    "file": "first_bspwm_paradise.jpg",
+    "fullImage": "first_bspwm_paradise.png"
   },
   {
     "id": "gnome-min",
