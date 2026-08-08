@@ -10,5 +10,6 @@
     },
     { "src": "/[^.]+", "dest": "/api/ssr" },
     { "src": "/", "dest": "/api/ssr" }
-  ]
+  ],
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
