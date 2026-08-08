@@ -131,7 +131,7 @@ export default async function handler(req: Request) {
   const origin = url.origin;
 
   const [htmlRes, metadata, rices] = await Promise.all([
-    fetch(`${origin}/index.html`),
+    fetch(`${origin}/_ssr.html`),
     getMetadata(origin),
     getRicesMetadata(origin),
   ]);
