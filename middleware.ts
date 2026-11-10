@@ -1,4 +1,4 @@
-import { createD3Middleware } from '@d3-inc/d3-edge-vercel-middleware';
+import { createD3Middleware } from '@d3-inc/d3-dna-vercel-middleware';
 
 export default createD3Middleware();
 
